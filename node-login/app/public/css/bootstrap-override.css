@@ -1,0 +1,114 @@
+body {
+	margin: 0;
+  background: url('/images/philadelphia.jpg') no-repeat center center fixed;
+	padding-top: 30px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+}
+.navbar {
+  width: 100%;
+  z-index: 1030;
+  border-radius: 0px;
+}
+.navbar-default {
+  width: 100%;
+  font-size: 1.2em;
+  background-color: #05014a;
+  border-color: #05014a;
+}
+.navbar-default .navbar-brand {
+  font-size: 1.4em;
+  color: #f5d003;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff700;
+}
+.navbar-default .navbar-text {
+  color: #f5d003;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #f5d003;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #fff700;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff700;
+  background-color: #22348e;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #fff700;
+  background-color: #22348e;
+}
+.navbar-default .navbar-toggle {
+  border-color: #22348e;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #22348e;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f5d003;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f5d003;
+}
+.navbar-default .navbar-link {
+  color: #f5d003;
+}
+.navbar-default .navbar-link:hover {
+  color: #fff700;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #f5d003;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff700;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff700;
+    background-color: #22348e;
+  }
+}
+
+
+.navbar-fixed-left {
+  background-color: #05014a;
+  padding-top: 2%;
+  width: 10%;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;  /* Cancel default li float: left */
+  width: 100%;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+  margin-top: -50px;
+  margin-left: 200px;
+}
+
+a.indent {
+  padding-left: 35px !important;
+}

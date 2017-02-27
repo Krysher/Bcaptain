@@ -1,0 +1,22 @@
+.container
+    .row
+        .col-lg-12
+            .page-header
+                h1 Search for members
+    .row
+        .col-lg-4.col-lg-offset-4
+            input#search.form-control(type='search', value='', placeholder='Search for members')
+    .row
+        .col-lg-12
+            table#table.table
+                thead
+                    tr
+                        th First Name
+                        th Last Name
+                        th Block
+                tbody
+                - for (var i = 0; i < mem.length; i++)
+                    tr
+                        td= mem[i].first_name
+                        td= mem[i].last_name
+                        td= mem[i].block

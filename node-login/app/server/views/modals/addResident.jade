@@ -1,0 +1,31 @@
+.addResident.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(data-dismiss='modal') x
+				h4 Add Resident
+			.modal-body
+				form#set-password-form.well
+					h6 Please tell us a little about this Resident.
+					.form-group
+						label.control-label.col-sm-3 First Name
+						.col-sm-9
+							input.form-control#name-tf(type='text', name='Rfirstname').required
+					.form-group
+						label.control-label.col-sm-3 Last Name
+						.col-sm-9
+							input.form-control#name-tf(type='text', name='Rlastname').required
+
+					.form-group
+						label.control-label.col-sm-3 Email
+						.col-sm-9
+							input.form-control#email-tf(type='text', name='Remail').required
+
+					.form-group
+						label.control-label.col-sm-3 Address
+						.col-sm-9
+							input.form-control#address-tf(type='text', name='Raddress').required
+					.clearfix
+						.form-buttons
+							button(type='button', onclick="$('.addResident').modal('hide');")#addresident-form-btn1.btn.btn-default
+							button(type='button' onclick="hcc.AddResident(); ")#addresident-form-btn2.btn.btn-primary

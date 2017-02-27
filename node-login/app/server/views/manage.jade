@@ -1,0 +1,90 @@
+extends layout
+
+block content	
+	include modals/alert
+	include modals/confirm1
+	include modals/addResident
+	include modals/updateResident
+	include leftnavbar
+	link(rel='stylesheet', href='/css/manage-override.css')
+
+
+
+	.container
+		#navbar.navbar.navbar-default(data-spy='affix')
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#', <strong='') BlockCaptain Network
+				.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(color='#d1a609') Jane Doe - 3022 Chestnut st
+						li
+							#btn-logout.navbar-btn.btn.btn-default Sign Out
+		.row
+			#title-header.col-md-12
+				h3.headtext Store, Edit, or Delete your Block Residents' contact information
+				figure.item
+					img(src='./images/person1.png' height='64px' width='64px')
+					figcaption.caption Coordinator
+				figure.item2
+					img(src='./images/person2.png' height='64px' width='64px')
+					figcaption.caption You
+				h4 Manage your BlockCaptain Network
+				br
+				button.btn.btn-primary(type='button', onclick="$('.addResident').modal('show')") Add a Resident
+				#managetable.table-responsive
+					table#mytable.table.table-bordred.table-striped
+						thead
+							th First Name
+							th Last Name
+							th Email
+							th Address
+							th Date Added
+							th Edit
+							th Delete
+						tbody
+						- for (var i = 0; i < accts.length; i++)
+							tr
+								td= accts[i].firstname
+								td= accts[i].lastname
+								td= accts[i].email
+								td= accts[i].address
+								td= accts[i].date
+								td
+									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateResident('#{accts[i].firstname}', '#{accts[i].lastname}', '#{accts[i].email}', '#{accts[i].address}', '#{accts[i]._id}')")
+										span.glyphicon.glyphicon-pencil
+								td
+									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveResident('#{accts[i]._id}')")
+										span.glyphicon.glyphicon-trash
+
+script.
+	$(document).ready(function(){
+	$("#mytable #checkall").click(function () {
+	if ($("#mytable #checkall").is(':checked')) {
+	$("#mytable input[type=checkbox]").each(function () {
+	$(this).prop("checked", true);
+	});
+	} else {
+	$("#mytable input[type=checkbox]").each(function () {
+	$(this).prop("checked", false);
+	});
+	}
+	});
+	$("[data-toggle=tooltip]").tooltip();
+	});
+
+
+block scripts
+	script(src='/vendor/jquery-2.2.3.min.js')
+	script(src='/vendor/jquery.form.min.js')
+	script(src='/vendor/bootstrap.min.js')
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/homeController.js')
+	script(src='/js/form-validators/accountValidator.js')
+	script.
+		var hcc = new HomeController();

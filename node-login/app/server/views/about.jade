@@ -1,0 +1,71 @@
+extends layout
+
+link(rel='stylesheet', href='/css/round-about.css')
+block content
+	include navbar
+		include modals/alert
+		include modals/confirm
+	.container
+		.row
+			.col-lg-12
+				h1.page-header
+					| About Us
+					br
+					small It's Nice to Meet You!
+				p
+					| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?
+		.row
+			.col-lg-12
+				h2.page-header Our Team
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+			.col-lg-4.col-sm-6.text-center
+				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
+				h3
+					| John Smith
+					small Job Title
+				p
+					| What does this team member to? Keep it short! This is also a great spot for social links!
+    
+
+
+block scripts
+		script(src='/vendor/jquery-2.2.3.min.js')
+		script(src='/vendor/jquery.form.min.js')
+		script(src='/vendor/bootstrap.min.js')
+		script(src='/js/views/home.js')
+		script(src='/js/controllers/homeController.js')
+		script(src='/js/form-validators/accountValidator.js')

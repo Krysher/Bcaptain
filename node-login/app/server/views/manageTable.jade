@@ -1,0 +1,43 @@
+#myModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+  .modal-header
+    button.close(type='button', data-dismiss='modal', aria-hidden='true')
+    h3#myModalLabel Delete
+  .modal-body
+    p
+  .modal-footer
+    button.btn(data-dismiss='modal', aria-hidden='true') Close
+    button#btnYes.btn.red(data-dismiss='modal') Confirm
+table.table.table-striped.table-hover.table-users
+  thead
+    tr
+      th.hidden-phone Username
+      th First Name
+      th Last Name
+      th.hidden-phone Email
+      th.hidden-phone Address
+      th.hidden-phone Registration Date
+      th
+      th
+  tbody
+    tr
+      td.hidden-phone johnny
+      td john
+      td doe
+      td.hidden-phone dsd@gmail.com
+      td.hidden-phone active
+      td.hidden-phone 10/12/1999
+      td
+        a.btn.mini.blue-stripe(href='{site_url()}admin/editFront/1') Edit
+      td
+        a.confirm-delete.btn.mini.red-stripe(href='#', role='button', data-title='johnny', data-id='1') Delete
+    tr
+      td.hidden-phone kitty
+      td jane
+      td doe
+      td.hidden-phone dasasasd@gmail.com
+      td.hidden-phone active
+      td.hidden-phone 10/1/1999
+      td
+        a.btn.mini.blue-stripe(href='{site_url()}admin/editFront/2') Edit
+      td
+        a.confirm-delete.btn.mini.red-stripe(href='#', role='button', data-title='kitty', data-id='2') Delete

@@ -1,0 +1,66 @@
+body {
+    background: none !important;
+    padding-top: 0px;
+}
+
+#managetable {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+#title-header {
+	position: relative;
+	top: 10%;
+}
+
+.row {
+	position: absolute;
+	left: 10%;
+	width: 88%;
+	height: 100%;
+	padding: 1%;
+}
+#calendar {
+	position: absolute;
+	padding-top: 4%;
+	padding-left: 2%;
+}
+#item {
+	left: 100px;
+}
+
+.caption {
+    /* Make the caption a block so it occupies its own line. */
+    display: block;
+}
+
+figure.item {
+	position: absolute;
+	right: 20px;
+    /* To correctly align image, regardless of content height: */
+    vertical-align: top;
+    display: inline-block;
+    /* To horizontally center images and caption */
+    text-align: center;
+    /* The width of the container also implies margin around the images. */
+    width: 120px;
+}
+
+figure.item2 {
+	position: absolute;
+	right: 120px;
+    /* To correctly align image, regardless of content height: */
+    vertical-align: top;
+    display: inline-block;
+    /* To horizontally center images and caption */
+    text-align: center;
+    /* The width of the container also implies margin around the images. */
+    width: 120px;
+}
+
+h3.headtext {
+	padding-top: 10px;
+	display: inline-block;
+	color: grey;
+	font-weight: 600;
+}

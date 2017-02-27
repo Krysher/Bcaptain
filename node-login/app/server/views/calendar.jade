@@ -1,0 +1,63 @@
+extends layout
+
+block content	
+	include modals/alert
+	include modals/confirm1
+	include leftnavbar
+	link(rel='stylesheet', href='/css/manage-override.css')
+	link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css')
+
+
+
+	.container
+		#navbar.navbar.navbar-default(data-spy='affix')
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#', <strong='') BlockCaptain Network
+				.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(color='#d1a609') Jane Doe - 3022 Chestnut st
+						li
+							#btn-logout.navbar-btn.btn.btn-default Sign Out
+		.row
+			#calendar
+			
+
+script.
+	$(document).ready(function(){
+	$("#mytable #checkall").click(function () {
+	if ($("#mytable #checkall").is(':checked')) {
+	$("#mytable input[type=checkbox]").each(function () {
+	$(this).prop("checked", true);
+	});
+	} else {
+	$("#mytable input[type=checkbox]").each(function () {
+	$(this).prop("checked", false);
+	});
+	}
+	});
+	$("[data-toggle=tooltip]").tooltip();
+	});
+
+
+block scripts
+	script(src='/vendor/jquery-2.2.3.min.js')
+	script(src='http://momentjs.com/downloads/moment.min.js')
+	script(src='/vendor/jquery.form.min.js')
+	script(src='/vendor/bootstrap.min.js')
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/homeController.js')
+	script(src='/js/form-validators/accountValidator.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js')
+	script.
+		var hcc = new HomeController();
+		$(document).ready(function() {
+		// page is now ready, initialize the calendar...
+		$('#calendar').fullCalendar({
+		})
+		});

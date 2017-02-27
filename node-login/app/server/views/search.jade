@@ -1,0 +1,17 @@
+extends layout
+
+block content	
+	include navbar
+	include search-render
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/vendor/jquery-2.2.3.min.js')
+	script(src='/vendor/jquery.form.min.js')
+	script(src='/vendor/bootstrap.min.js')
+	script(src='/js/views/home.js')
+	script(src='/js/controllers/homeController.js')
+	script(src='/js/controllers/searchable.js')
+	script(src='/js/form-validators/accountValidator.js')
+	script(src='//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js')
