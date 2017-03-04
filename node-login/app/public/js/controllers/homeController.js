@@ -67,6 +67,29 @@ function HomeController()
 	}
 
 
+		this.addNews = function()
+	{
+		var Rfirstname = $('input[name=Rfirstname]').val();
+		var Rlastname = $('input[name=Rlastname]').val();
+		var Remail = $('input[name=Remail]').val();
+		var Raddress = $('input[name=Raddress]').val();
+
+		var that = this;
+		$.ajax({
+			url: '/addNews',
+			type: 'POST',
+			data: { fn: Rfirstname, ln: Rlastname, email: Remail, address: Raddress},
+			success: function(data){
+				$('.addNews').modal('hide');
+	 			that.showLockedAlertNM('Succesfully added News');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+
+
 
 
 	this.showUpdateResident = function(firstname, lastname, email, address, id) {
@@ -162,6 +185,16 @@ function HomeController()
 		$('.modal-alert').modal('show');
 		$('.modal-alert button').click(function(){window.location.href = '/manage';})
 		setTimeout(function(){window.location.href = '/manage';}, 3000);
+	}
+
+
+	this.showLockedAlertNM = function(msg){
+		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
+		$('.modal-alert .modal-header h4').text('Success!');
+		$('.modal-alert .modal-body p').html(msg);
+		$('.modal-alert').modal('show');
+		$('.modal-alert button').click(function(){window.location.href = '/news';})
+		setTimeout(function(){window.location.href = '/news';}, 3000);
 	}
 
 }

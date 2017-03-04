@@ -8,7 +8,7 @@ var moment 		= require('moment');
 	ESTABLISH DATABASE CONNECTION
 */
 
-var dbName = process.env.DB_NAME || 'accounts';
+var dbName = process.env.DB_NAME || 'news';
 var dbHost = process.env.DB_HOST || 'localhost'
 var dbPort = process.env.DB_PORT || 27017;
 
@@ -32,47 +32,64 @@ db.open(function(e, d){
 	}
 });
 
-var accounts = db.collection('accounts');
-
+var news = db.collection('news');
 
 /* record insertion, update & deletion methods */
 
-exports.addNewAccount = function(newData, callback)
-	{
-	accounts.findOne({email:newData.email}, function(e, o) {
+exports.addNews = function(newData, callback)
+{
+	news.findOne({user:newData.user}, function(e, o) {
 		if (o){
-			callback('email-taken');
-		}	else
-		{
-			newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-			accounts.insert(newData, {safe: true}, callback);
-		};
+			callback('username-taken');
+		}	else{
+			news.findOne({email:newData.email}, function(e, o) {
+				if (o){
+					callback('email-taken');
+				}	else{
+					saltAndHash(newData.pass, function(hash){
+						newData.pass = hash;
+					// append date stamp when record was created //
+						newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+						news.insert(newData, {safe: true}, callback);
+					});
+				}
+			});
 		}
-);
+	});
 }
+
 exports.updateAccount = function(newData, callback)
 {
-	accounts.findOne({_id:getObjectId(newData.id)}, function(e, o){
-		o.firstname 	= newData.firstname;
-		o.last    	    = newData.lastname;
-		o.email 	    = newData.email;
-		o.address       = newData.address;
-		accounts.save(o, {safe: true}, function(e) {
-		if (e) callback(e);
-			else callback(null, o);
-		});
+	news.findOne({_id:getObjectId(newData.id)}, function(e, o){
+		o.name 		= newData.name;
+		o.email 	= newData.email;
+		o.country 	= newData.country;
+		if (newData.pass == ''){
+			news.save(o, {safe: true}, function(e) {
+				if (e) callback(e);
+				else callback(null, o);
+			});
+		}	else{
+			saltAndHash(newData.pass, function(hash){
+				o.pass = hash;
+				news.save(o, {safe: true}, function(e) {
+					if (e) callback(e);
+					else callback(null, o);
+				});
+			});
+		}
 	});
 }
 
 exports.updatePassword = function(email, newPass, callback)
 {
-	accounts.findOne({email:email}, function(e, o){
+	news.findOne({email:email}, function(e, o){
 		if (e){
 			callback(e, null);
 		}	else{
 			saltAndHash(newPass, function(hash){
 		        o.pass = hash;
-		        accounts.save(o, {safe: true}, callback);
+		        news.save(o, {safe: true}, callback);
 			});
 		}
 	});
@@ -82,23 +99,29 @@ exports.updatePassword = function(email, newPass, callback)
 
 exports.deleteAccount = function(id, callback)
 {
-	accounts.remove({_id: getObjectId(id)}, callback);
+	news.remove({_id: getObjectId(id)}, callback);
 }
 
 exports.removeAccount = function(id, callback)
 {
-	accounts.remove({_id: getObjectId(id)}, callback);
+	news.remove({_id: getObjectId(id)}, callback);
 }
 
 exports.getAccountByEmail = function(email, callback)
 {
-	accounts.findOne({email:email}, function(e, o){ callback(o); });
+	news.findOne({email:email}, function(e, o){ callback(o); });
 }
 
+exports.validateResetLink = function(email, passHash, callback)
+{
+	news.find({ $and: [{email:email, pass:passHash}] }, function(e, o){
+		callback(o ? 'ok' : null);
+	});
+}
 
 exports.getAllRecords = function(callback)
 {
-	accounts.find().toArray(
+	news.find().toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)
@@ -107,7 +130,7 @@ exports.getAllRecords = function(callback)
 
 exports.delAllRecords = function(callback)
 {
-	accounts.remove({}, callback); // reset accounts collection for testing //
+	news.remove({}, callback); // reset news collection for testing //
 }
 
 /* private encryption & validation methods */
@@ -147,7 +170,7 @@ var getObjectId = function(id)
 
 var findById = function(id, callback)
 {
-	accounts.findOne({_id: getObjectId(id)},
+	news.findOne({_id: getObjectId(id)},
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)
@@ -157,7 +180,7 @@ var findById = function(id, callback)
 var findByMultipleFields = function(a, callback)
 {
 // this takes an array of name/val pairs to search against {fieldName : 'value'} //
-	accounts.find( { $or : a } ).toArray(
+	news.find( { $or : a } ).toArray(
 		function(e, results) {
 		if (e) callback(e)
 		else callback(null, results)

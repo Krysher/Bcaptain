@@ -112,3 +112,9 @@ body {
 a.indent {
   padding-left: 35px !important;
 }
+
+.control-label {
+  padding-top: 2%;
+
+
+}

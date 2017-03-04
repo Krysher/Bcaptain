@@ -1,0 +1,54 @@
+.addResident.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(data-dismiss='modal') x
+				h4 Add News
+			.modal-body
+				form#set-password-form.well
+					h6 Please tell us a little about this Resident.
+					.form-group
+						label.control-label.col-sm-3 First Name
+						.col-sm-9
+							input.form-control#name-tf(type='text', name='Rfirstname').required
+					.form-group
+						label.control-label.col-sm-3 Last Name
+						.col-sm-9
+							input.form-control#name-tf(type='text', name='Rlastname').required
+
+					.form-group
+						label.control-label.col-sm-3 Email
+						.col-sm-9
+							input.form-control#email-tf(type='text', name='Remail').required
+
+					.form-group
+						label.control-label.col-sm-3 Address
+						.col-sm-9
+							input.form-control#address-tf(type='text', name='Raddress').required
+					.form-group
+						label.control-label.col-sm-3 Date
+						.col-sm-9
+							.form-group
+								#datetimepicker5.input-group.date
+									input.form-control(type='text')
+									span.input-group-addon
+										span.glyphicon.glyphicon-calendar
+						script(type='text/javascript').
+							$(document).ready(function(){
+							$(function () {
+							$('#datetimepicker5').datetimepicker({
+							defaultDate: "03/06/2017",
+							disabledDates: [
+							moment("12/25/2013"),
+							new Date(2013, 11 - 1, 21),
+							"11/22/2013 00:53"
+							]
+							});
+							});
+							});
+
+
+					.clearfix
+						.form-buttons
+							button(type='button', onclick="$('.addNews').modal('hide');")#addresident-form-btn1.btn.btn-default
+							button(type='button' onclick="hcc.addNews(); ")#addresident-form-btn2.btn.btn-primary

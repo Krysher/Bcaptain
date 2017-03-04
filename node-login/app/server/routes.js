@@ -4,6 +4,7 @@ var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 var MM = require('./modules/member-manager');
 var RM = require('./modules/resident-manager');
+var NM = require('./modules/news-manager');
 
 module.exports = function(app) {
 
@@ -198,7 +199,7 @@ module.exports = function(app) {
 	});
 	
 	app.get('/about', function(req, res) {
-		res.render('about', {  title: 'About the team', countries: CT });
+		res.render('about', {  title: 'About the team'});
 	});
 
 	app.get('/list', function(req, res) {
@@ -223,6 +224,15 @@ module.exports = function(app) {
 			res.render('calendar', {  title: 'Manage your calendar', accts: accounts });
 		})
 	});
+		app.get('/news', function(req, res) {
+		NM.getAllRecords( function(e, news){
+			res.render('news', {  title: 'Manage your News', accts: news });
+		})
+	});
+
+
+
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 
@@ -234,6 +244,21 @@ module.exports = function(app) {
 
 	app.post('/addresident', function(req, res){
 		RM.addNewAccount({
+			firstname 	: req.body.fn,
+			lastname 	: req.body.ln,
+			email 		: req.body.email,
+			address 	: req.body.address
+		}, function(e){
+			if (e){
+				res.status(400).send(e);
+			}	else{
+				res.status(200).send('ok');
+			}
+		});
+	});
+
+		app.post('/addNews', function(req, res){
+		NM.addNews({
 			firstname 	: req.body.fn,
 			lastname 	: req.body.ln,
 			email 		: req.body.email,
@@ -279,6 +304,11 @@ module.exports = function(app) {
 			}
 	    });
 	});
+
+
+
+
+
 
 
 
