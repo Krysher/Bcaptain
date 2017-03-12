@@ -64,3 +64,21 @@ h3.headtext {
 	color: grey;
 	font-weight: 600;
 }
+
+tr[name=Information] {
+    border-color: #d6e9c6 !important;
+	background-color: #dff0d8 !important;
+
+}
+
+tr[name=Notice] {
+	border-color: #ebccd1 !important;
+	background-color: #f2dede !important;
+	
+}
+
+tr[name=Event] {
+	border-color: #bce8f1 !important;
+	background-color: #d9edf7 !important;
+	
+}

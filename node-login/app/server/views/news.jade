@@ -50,7 +50,7 @@ block content
 							th Delete
 						tbody
 						- for (var i = 0; i < accts.length; i++)
-							tr
+							tr(name="#{accts[i].event_type}")
 								td= accts[i].event_name
 								td= accts[i].event_type
 								td= accts[i].event_date
