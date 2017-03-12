@@ -216,8 +216,8 @@ module.exports = function(app) {
 			res.redirect('/');
 		}
 		else {
-			AM.getAllRecords( function(e, accounts){
-				res.render('calendar', {  title: 'Manage your calendar', accts: accounts, udata: req.session.user });
+			NM.getAllRecords( function(e, news){
+				res.render('calendar', {  title: 'Manage your calendar', accts: news, udata: req.session.user });
 			})
 		}
 	});

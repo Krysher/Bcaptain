@@ -5,8 +5,8 @@
 				button.close(data-dismiss='modal') x
 				h4 Update Event
 			.modal-body
-				form#set-password-form.well
-					h6 Please tell us a little about this Resident.
+				form.well
+					h6 Please tell us a little about this Event.
 					.form-group
 						label.control-label.col-sm-3 Event Name
 						.col-sm-9
@@ -22,11 +22,10 @@
 					.form-group
 						label.control-label.col-sm-3 Event Date
 						.col-sm-9
-							.form-group
-								#datetimepicker5.input-group.date
-									input.form-control#event_date(type='text', name='event_date', value="")
-									span.input-group-addon
-										span.glyphicon.glyphicon-calendar
+							#datetimepicker5.input-group.date
+								input.form-control#event_date(type='text', name='event_date', value="")
+								span.input-group-addon
+									span.glyphicon.glyphicon-calendar
 
 					.clearfix
 						.form-buttons

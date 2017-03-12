@@ -22,6 +22,18 @@ block content
 						span.icon-bar
 					a.navbar-brand(href='#', <strong='') BlockCaptain Network
 				.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-left
+						li
+							a(href='/home') Home
+						li
+							a(href='/manage') Manage
+						li
+							a(href='/calendar') Calendar
+						li
+							a(href='/about') About
+						li
+							a(href='/contact') Contact
+
 					ul.nav.navbar-nav.navbar-right
 						li
 							a(color='#d1a609') #{user.firstname} - 3022 Chestnut st
@@ -29,13 +41,14 @@ block content
 							#btn-logout.navbar-btn.btn.btn-default Sign Out
 		.row
 			#title-header.col-md-12
-				h3.headtext Create, Edit or Delete your Events, Block Notices, and other content.
+				
 				figure.item
 					img(src='./images/person1.png' height='64px' width='64px')
 					figcaption.caption Coordinator
 				figure.item2
 					img(src='./images/person2.png' height='64px' width='64px')
 					figcaption.caption #{user.firstname}
+				h3.headtext Create, Edit or Delete your Events, Block Notices, and other content.
 				h4 Manage your BlockCaptain Network
 				br
 				button.btn.btn-primary(type='button', onclick="$('.addNews').modal('show')") Add New News
