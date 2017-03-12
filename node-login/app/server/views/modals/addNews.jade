@@ -1,4 +1,6 @@
-.addResident.modal.fade
+.addNews.modal.fade
+	// preset form values if we receive a userdata object //
+	- user = typeof(udata) != 'undefined' ? udata : { }
 	.modal-dialog
 		.modal-content
 			.modal-header
@@ -6,43 +8,33 @@
 				h4 Add News
 			.modal-body
 				form#set-password-form.well
-					h6 Please tell us a little about this Resident.
+					h6 Please tell us a little about this Event.
 					.form-group
-						label.control-label.col-sm-3 First Name
+						label.control-label.col-sm-3 Event Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Rfirstname').required
+							input.form-control#name-tf(type='text', name='event_name').required
+							input(type='hidden', name='creator', value= user.user)
 					.form-group
-						label.control-label.col-sm-3 Last Name
+						label.control-label.col-sm-3 Event Type
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Rlastname').required
-
+							select(name='event_type')
+								option(value='Event') Event
+								option(value='Notice') Notice
+								option(value='Information') Information
 					.form-group
-						label.control-label.col-sm-3 Email
-						.col-sm-9
-							input.form-control#email-tf(type='text', name='Remail').required
-
-					.form-group
-						label.control-label.col-sm-3 Address
-						.col-sm-9
-							input.form-control#address-tf(type='text', name='Raddress').required
-					.form-group
-						label.control-label.col-sm-3 Date
+						label.control-label.col-sm-3 Event Date
 						.col-sm-9
 							.form-group
 								#datetimepicker5.input-group.date
-									input.form-control(type='text')
+									input.form-control(type='text', name='event_date')
 									span.input-group-addon
 										span.glyphicon.glyphicon-calendar
+
 						script(type='text/javascript').
 							$(document).ready(function(){
 							$(function () {
 							$('#datetimepicker5').datetimepicker({
-							defaultDate: "03/06/2017",
-							disabledDates: [
-							moment("12/25/2013"),
-							new Date(2013, 11 - 1, 21),
-							"11/22/2013 00:53"
-							]
+							defaultDate: "03/12/2017",
 							});
 							});
 							});

@@ -46,7 +46,7 @@ function HomeController()
 
 	this.AddResident = function()
 	{
-		var Rfirstname = $('input[name=Rfirstname]').val();
+		var event_ = $('input[name=Rfirstname]').val();
 		var Rlastname = $('input[name=Rlastname]').val();
 		var Remail = $('input[name=Remail]').val();
 		var Raddress = $('input[name=Raddress]').val();
@@ -66,28 +66,6 @@ function HomeController()
 		});
 	}
 
-
-		this.addNews = function()
-	{
-		var Rfirstname = $('input[name=Rfirstname]').val();
-		var Rlastname = $('input[name=Rlastname]').val();
-		var Remail = $('input[name=Remail]').val();
-		var Raddress = $('input[name=Raddress]').val();
-
-		var that = this;
-		$.ajax({
-			url: '/addNews',
-			type: 'POST',
-			data: { fn: Rfirstname, ln: Rlastname, email: Remail, address: Raddress},
-			success: function(data){
-				$('.addNews').modal('hide');
-	 			that.showLockedAlertNM('Succesfully added News');
-			},
-			error: function(jqXHR){
-				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
-			}
-		});
-	}
 
 
 
@@ -130,6 +108,15 @@ function HomeController()
 
 
 
+
+
+
+
+
+
+
+
+
 	this.removeResident = function(userId)
 	{
 		$('.modal-confirm1').modal('hide');
@@ -148,8 +135,102 @@ function HomeController()
 		});
 	}
 
-	this.weird = function() {
-		alert('weird');
+
+
+
+
+
+// FOR NEWS
+
+		this.showRemoveNews = function(userId)
+	{
+		userId = userId;
+		$('.modal-confirm2').modal('show');
+		$('.modal-confirm2 .submit').click(function(){ that.removeNews(userId); });
+	}
+
+
+
+		this.addNews = function()
+	{
+		var event_name = $('input[name=event_name]').val();
+		var event_type = $('select[name=event_type]').val();
+		var event_date = $('input[name=event_date]').val();
+		var creator    = $('input[name=creator]').val();
+
+		var that = this;
+		$.ajax({
+			url: '/addNews',
+			type: 'POST',
+			data: { en: event_name, et: event_type, ed: event_date, creator: creator},
+			success: function(data){
+				$('.addNews').modal('hide');
+	 			that.showLockedAlertNM('Succesfully added Event');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+
+
+
+	this.showUpdateNews = function(event_name, event_type, event_date, event_id) {
+		//console.log(event_name);
+		$('.updateNews').on('show.bs.modal', function(event) {
+			$(".updateNews").find('input[name="event_name"]').val(event_name);
+			$(".updateNews").find('select[name="event_type"]').val(event_type);
+			$(".updateNews").find('input[name="event_date"]').val(event_date);
+			$(".updateNews").find('input[name="event_id"]').val(event_id);
+		})
+
+		$('.updateNews').modal('show');
+
+	}
+
+
+
+
+	this.UpdateNews = function()
+	{
+		var event_name = $('#event_name').val();
+		var event_type = $('#event_type').val();
+		var event_date = $('#event_date').val();
+		var event_id = $('input[name=event_id]').val(); 
+		var that = this;
+		$.ajax({
+			url: '/updateNews',
+			type: 'POST',
+			data: { id: event_id, en: event_name, et: event_type, ed: event_date},
+			success: function(data){
+				$('.updateNews').modal('hide');
+	 			that.showLockedAlertNM('Succesfully Update Event Information');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+
+
+
+
+
+	this.removeNews = function(userId)
+	{
+		$('.modal-confirm2').modal('hide');
+		var that = this;
+		$.ajax({
+			url: '/delNews',
+			type: 'POST',
+			data: { id: userId},
+			success: function(data){
+	 			that.showLockedAlertNM('This Event has been deleted.');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
 	}
 
 	this.attemptLogout = function()

@@ -1,8 +1,5 @@
-
-var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
-var MM = require('./modules/member-manager');
 var RM = require('./modules/resident-manager');
 var NM = require('./modules/news-manager');
 
@@ -164,12 +161,12 @@ module.exports = function(app) {
 	
 // view & delete accounts //
 	
-	app.get('/print', function(req, res) {
+/*	app.get('/print', function(req, res) {
 		AM.getAllRecords( function(e, accounts){
 			res.render('print', { title : 'Account List', accts : accounts });
 		})
 	});
-	
+*/	
 	app.post('/delete', function(req, res){
 		AM.deleteAccount(req.body.id, function(e, obj){
 			if (!e){
@@ -202,32 +199,37 @@ module.exports = function(app) {
 		res.render('about', {  title: 'About the team'});
 	});
 
-	app.get('/list', function(req, res) {
-		MM.listMember( function(e, members){
-			res.render('list', { title : 'Member List', mem : members });
-		})
-	});
-
-	app.get('/search', function(req, res) {
-		MM.listMember( function(e, members){
-			res.render('search', { title : 'Search Members', mem : members });
-		})
-	});	
-
 	app.get('/manage', function(req, res) {
-		RM.getAllRecords( function(e, accounts){
-			res.render('manage', {  title: 'Manage your block', accts: accounts });
-		})
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}
+
+			else {
+			RM.getAllRecords( function(e, accounts){
+				res.render('manage', {  title: 'Manage your block', accts: accounts, udata: req.session.user });
+			})
+		}
 	});
 		app.get('/calendar', function(req, res) {
-		AM.getAllRecords( function(e, accounts){
-			res.render('calendar', {  title: 'Manage your calendar', accts: accounts });
-		})
+		if (req.session.user == null){
+			res.redirect('/');
+		}
+		else {
+			AM.getAllRecords( function(e, accounts){
+				res.render('calendar', {  title: 'Manage your calendar', accts: accounts, udata: req.session.user });
+			})
+		}
 	});
 		app.get('/news', function(req, res) {
-		NM.getAllRecords( function(e, news){
-			res.render('news', {  title: 'Manage your News', accts: news });
-		})
+		if (req.session.user == null){
+			res.redirect('/');
+		}
+		else {
+			NM.getAllRecords( function(e, news){
+				res.render('news', {  title: 'Manage your News', accts: news, udata: req.session.user });
+			})
+		}
 	});
 
 
@@ -259,10 +261,10 @@ module.exports = function(app) {
 
 		app.post('/addNews', function(req, res){
 		NM.addNews({
-			firstname 	: req.body.fn,
-			lastname 	: req.body.ln,
-			email 		: req.body.email,
-			address 	: req.body.address
+			event_name 	: req.body.en,
+			event_type 	: req.body.et,
+			event_date  : req.body.ed,
+			creator     : req.body.creator,
 		}, function(e){
 			if (e){
 				res.status(400).send(e);
@@ -273,30 +275,53 @@ module.exports = function(app) {
 	});
 
 
+	app.post('/updateNews', function(req, res){
+		//console.log(req.body);
+		NM.updateNews({
+			id          : req.body.id,
+			event_name 	: req.body.en,
+			event_type 	: req.body.et,
+			event_date  : req.body.ed,
+		}, function(e, o){
+			if (e){
+				res.status(400).send('error-updating-account');
+			}	else{
+				res.status(200).send('ok');
+			}
+		});
+	});
+
+
 
 	app.post('/updateResident', function(req, res){
-		if (req.session.user == null){
-			res.redirect('/');
-		}	else{
-			RM.updateAccount({
-				id          : req.body.id,
-				firstname 	: req.body.fn,
-				lastname 	: req.body.ln,
-				email 		: req.body.email,
-				address 	: req.body.address
-			}, function(e, o){
-				if (e){
-					res.status(400).send('error-updating-account');
-				}	else{
-					res.status(200).send('ok');
-				}
-			});
-		}
+		RM.updateAccount({
+			id          : req.body.id,
+			firstname 	: req.body.fn,
+			lastname 	: req.body.ln,
+			email 		: req.body.email,
+			address 	: req.body.address
+		}, function(e, o){
+			if (e){
+				res.status(400).send('error-updating-account');
+			}	else{
+				res.status(200).send('ok');
+			}
+		});
 	});
 
 
 		app.post('/delResident', function(req, res){
 		RM.deleteAccount(req.body.id, function(e, obj){
+			if (!e){
+				res.status(200).send('ok');
+			}	else{
+				res.status(400).send('record not found');
+			}
+	    });
+	});
+
+		app.post('/delNews', function(req, res){
+		NM.deleteNews(req.body.id, function(e, obj){
 			if (!e){
 				res.status(200).send('ok');
 			}	else{

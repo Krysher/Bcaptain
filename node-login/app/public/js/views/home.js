@@ -53,6 +53,12 @@ $(document).ready(function(){
 	$('.modal-confirm1 .submit').html('Delete');
 	$('.modal-confirm1 .submit').addClass('btn-danger');
 
+	$('.modal-confirm2').modal({ show : false, keyboard : true, backdrop : true });
+	$('.modal-confirm2 .modal-header h4').text('Delete Event');
+	$('.modal-confirm2 .modal-body p').html('Are you sure you want to delete this Event?');
+	$('.modal-confirm2 .cancel').html('Cancel');
+	$('.modal-confirm2 .submit').html('Delete');
+	$('.modal-confirm2 .submit').addClass('btn-danger');
 
 
 	$('.modal-confirm1').modal({ show : false, keyboard : true, backdrop : true });

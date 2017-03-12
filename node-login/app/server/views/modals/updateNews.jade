@@ -1,0 +1,34 @@
+.updateNews.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button.close(data-dismiss='modal') x
+				h4 Update Event
+			.modal-body
+				form#set-password-form.well
+					h6 Please tell us a little about this Resident.
+					.form-group
+						label.control-label.col-sm-3 Event Name
+						.col-sm-9
+							input.form-control#event_name(type='text', name='event_name', value="")
+							input.form-control#name-tf(type='hidden', name='event_id', value="")
+					.form-group
+						label.control-label.col-sm-3 Event Type
+						.col-sm-9
+							select(name='event_type')#event_type
+								option(value='Event') Event
+								option(value='Notice') Notice
+								option(value='Information') Information
+					.form-group
+						label.control-label.col-sm-3 Event Date
+						.col-sm-9
+							.form-group
+								#datetimepicker5.input-group.date
+									input.form-control#event_date(type='text', name='event_date', value="")
+									span.input-group-addon
+										span.glyphicon.glyphicon-calendar
+
+					.clearfix
+						.form-buttons
+							button(type='button' onclick="$('.updateNews').modal('hide');")#updateResident-form-btn1.btn.btn-default
+							button(type='button' onclick="hcc.UpdateNews();")#updateResident-form-btn2.btn.btn-primary
