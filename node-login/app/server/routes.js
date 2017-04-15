@@ -201,10 +201,9 @@ module.exports = function(app) {
 
 	app.get('/manage', function(req, res) {
 		if (req.session.user == null){
-	// if user is not logged-in redirect back to login page //
+			// if user is not logged-in redirect back to login page //
 			res.redirect('/');
 		}
-
 			else {
 			RM.getAllRecords( function(e, accounts){
 				res.render('manage', {  title: 'Manage your block', accts: accounts, udata: req.session.user });
@@ -217,6 +216,7 @@ module.exports = function(app) {
 		}
 		else {
 			NM.getAllRecords( function(e, news){
+				console.log(news);
 				res.render('calendar', {  title: 'Manage your calendar', accts: news, udata: req.session.user });
 			})
 		}

@@ -15,32 +15,21 @@
 							input.form-control#name-tf(type='text', name='event_name').required
 							input(type='hidden', name='creator', value= user.user)
 					.form-group
+						label.control-label.col-sm-3 Duration (Hour)
+						.col-sm-9
+							input.form-control#event_length(type='text', name='event_length', value="0.5").form-control
+					.form-group
 						label.control-label.col-sm-3 Event Type
 						.col-sm-9
-							select(name='event_type')
+							select(name='event_type').form-control
 								option(value='Event') Event
 								option(value='Notice') Notice
 								option(value='Information') Information
 					.form-group
 						label.control-label.col-sm-3 Event Date
 						.col-sm-9
-							.form-group
-								#datetimepicker5.input-group.date
-									input.form-control(type='text', name='event_date')
-									span.input-group-addon
-										span.glyphicon.glyphicon-calendar
-
-						script(type='text/javascript').
-							$(document).ready(function(){
-							$(function () {
-							$('#datetimepicker5').datetimepicker({
-							defaultDate: "03/12/2017",
-							});
-							});
-							});
-
-
-					.clearfix
-						.form-buttons
+							input#datetimepicker(type='text', name='event_date').form-control
+					.form-group
+						.form-button
 							button(type='button', onclick="$('.addNews').modal('hide');")#addresident-form-btn1.btn.btn-default
 							button(type='button' onclick="hcc.addNews(); ")#addresident-form-btn2.btn.btn-primary

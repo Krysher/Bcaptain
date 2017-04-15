@@ -1,0 +1,65 @@
+doctype html
+html(lang='en')
+  head
+    title BlockCaptin Netwrok
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/style.css')
+    style.
+      .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      }
+      .navbar {
+      background-color:#000066;
+      }
+      .nav.navbar-nav.navbar-left li a {
+      color: yellow;
+      }
+      .container {
+      margin: auto;
+      width: 25%;
+      transform: translateY(50%);
+      }
+      .form-actions {
+      margin: 0;
+      text-align: center;
+      }
+      body {
+      background-image: url(philadelphia.jpg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      }
+  body
+    nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') BlockCaptin Network
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-left
+            li.active
+              a(href='#') SIGN IN
+            li
+              a(href='#') ABOUT BLOCK CAPTIN
+            li
+              a(href='#') CONTACT US
+          ul.nav.navbar-nav.navbar-right
+            a.btn.btn-primary.btn-lg(href='#', role='button') SIGN UP
+    .container
+      form
+        .form-group
+          label(for='usr') Username:
+          input#usr.form-control(type='text', placeholder='Enter Username')
+        .form-group
+          label(for='pwd') Password:
+          input#pwd.form-control(type='password', placeholder='Enter Password')
+        a.btn.btn-link(href='#', role='button') Forgot Username or Password?
+        .form-actions
+          button.btn.btn-primary(type='SIGN IN') SIGN IN

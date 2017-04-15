@@ -39,7 +39,16 @@ input(type='hidden', value= user._id)#userId
 			label.control-label.col-sm-3 Password
 			.col-sm-9
 				input.form-control#pass-tf(type='password', name='pass', value='')
-
+		.form-group
+			label.control-label.col-sm-3 Confirm Password
+			.col-sm-9
+				input.form-control#conf-pass-tf(type='password', name='conf_pass', value='')
+		.container.inner-container-2
+			h4
+				p.text-center I am a...
+				h4.text-center
+					input.btn.btn-primary.btn-sm#select_bc(type='button', value='BLOCK CAPTAIN')
+					input.btn.btn-primary.btn-sm#select_co(type='button', value='COORDINATOR')
 		hr
 		.form-buttons
 			button(type='button')#account-form-btn1.btn.btn-default

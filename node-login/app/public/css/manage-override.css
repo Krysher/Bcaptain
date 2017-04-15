@@ -28,6 +28,14 @@ body {
 #item {
 	left: 100px;
 }
+.modal .form-group {
+	padding-bottom: 1px;
+	clear:both; 
+}
+
+.modal .form-button {
+	padding-top: 4%;
+}
 
 .caption {
     /* Make the caption a block so it occupies its own line. */

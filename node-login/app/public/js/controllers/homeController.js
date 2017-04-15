@@ -46,7 +46,7 @@ function HomeController()
 
 	this.AddResident = function()
 	{
-		var event_ = $('input[name=Rfirstname]').val();
+		var Rfirstname = $('input[name=Rfirstname]').val();
 		var Rlastname = $('input[name=Rlastname]').val();
 		var Remail = $('input[name=Remail]').val();
 		var Raddress = $('input[name=Raddress]').val();
@@ -157,7 +157,6 @@ function HomeController()
 		var event_type = $('select[name=event_type]').val();
 		var event_date = $('input[name=event_date]').val();
 		var creator    = $('input[name=creator]').val();
-
 		var that = this;
 		$.ajax({
 			url: '/addNews',
@@ -195,8 +194,9 @@ function HomeController()
 	{
 		var event_name = $('#event_name').val();
 		var event_type = $('#event_type').val();
-		var event_date = $('#event_date').val();
+		var event_date = $(".updateNews").find('input[name="event_date"]').val();
 		var event_id = $('input[name=event_id]').val(); 
+		console.log(event_date);
 		var that = this;
 		$.ajax({
 			url: '/updateNews',

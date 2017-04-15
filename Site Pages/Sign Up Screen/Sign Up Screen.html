@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BlockCaptin Netwrok</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .navbar {
+      background-color:#000066;
+    }
+
+    .nav.navbar-nav.navbar-left li a {
+      color: yellow;
+    }
+
+    .container { 
+      margin: auto;
+      width: 75%;
+      transform: translateY(5%);
+      text-align: center;
+    }
+
+    .inner-container-1 {
+     text-align: left;
+    }
+   
+    .inner-container-2 {
+     text-align: center;
+    }
+
+    .inner-container-3 {
+     width: 100%;
+     text-align: right;
+    }
+ 
+    .form-actions {
+      margin: 0;
+      text-align: center;
+    }
+
+    body {
+      background-image: url(philadelphia.jpg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+ <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>                        
+       </button>
+       <a class="navbar-brand" href="#">BlockCaptin Network</a>
+     </div>
+     <div class="collapse navbar-collapse" id="myNavbar">
+       <ul class="nav navbar-nav navbar-left">
+         <li class="active"><a href="#">SIGN IN</a></li>
+         <li><a href="#">ABOUT BLOCK CAPTIN</a></li>
+         <li><a href="#">CONTACT US</a></li>
+       </ul>
+       <ul class="nav navbar-nav navbar-right">
+         <a href="Sign Up Screen.html" class="btn btn-primary btn-lg" role="button">SIGN UP</a>
+       </ul>
+     </div>
+   </div>
+ </nav>
+
+ <div class="container">
+  <div class="container inner-container-1">
+   <div class="panel panel-default">
+    <div class="panel-heading">Sign Up</div>
+    <div class="panel-body">
+     <form>
+      <div class="form-group">
+       <label for="fName">First Name:</label>
+       <input type="text" class="form-control" id="fName" placeholder="Enter First Name">
+      </div>
+      <div class="form-group">
+       <label for="lName">First Name:</label>
+       <input type="text" class="form-control" id="lName" placeholder="Enter Last Name">
+      </div>
+      <div class="form-group">
+       <label for="email">Email Address:</label>
+       <input type="email" class="form-control" id="email" placeholder="Enter Email Address">
+      </div>
+      <div class="form-group">
+       <label for="pwd">Password:</label>
+       <input type="password" class="form-control" id="pwd" placeholder="Enter Password">
+      </div>
+      <div class="form-group">
+       <label for="sAdd">Street Address:</label>
+       <input type="text" class="form-control" id="sAdd" placeholder="Enter Street Address">
+      </div>
+      <div class="container inner-container-2">
+       <h4>I am a...<h4>
+        <input type="button" class="btn btn-primary btn-sm" value="BLOCK CAPTAIN">
+        <input type="button" class="btn btn-primary btn-sm" value="COORDINATOR">
+      </div>
+     </form>
+    </div>
+    <div class="panel-footer">
+     <div class="container inner-container-3">
+      <a href="Front Page.html" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
+      <!--The following part doesn't work ;(-->
+      <button type="submit" onclick="Confirm()" class="btn btn-primary" id="submit">Submit</button>
+       <script>
+        function Confirm() {
+         if (BLOCK CAPTAIN) {
+           alert("Thank you. A BlockCaptain Administrator will contact you shortly with confirmation as a Block Captain.");
+         }
+         else {
+           alert("Thank you. A BlockCaptain Administrator will contact you shortly with confirmation as a Coordinator.");           
+        }
+      </script>
+     </div>
+    </div>
+  </div>
+   
+ </div>
+</body>
+
+</html>

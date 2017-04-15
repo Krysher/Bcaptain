@@ -1,0 +1,105 @@
+doctype html
+html(lang='en')
+  head
+    title BlockCaptin Netwrok
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/style.css')
+    style.
+      .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+      }
+      .navbar {
+      background-color:#000066;
+      }
+      .nav.navbar-nav.navbar-left li a {
+      color: yellow;
+      }
+      .container {
+      margin: auto;
+      width: 75%;
+      transform: translateY(5%);
+      text-align: center;
+      }
+      .inner-container-1 {
+      text-align: left;
+      }
+      .inner-container-2 {
+      text-align: center;
+      }
+      .inner-container-3 {
+      width: 100%;
+      text-align: right;
+      }
+      .form-actions {
+      margin: 0;
+      text-align: center;
+      }
+      body {
+      background-image: url(philadelphia.jpg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      }
+  body
+    nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') BlockCaptin Network
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-left
+            li.active
+              a(href='#') SIGN IN
+            li
+              a(href='#') ABOUT BLOCK CAPTIN
+            li
+              a(href='#') CONTACT US
+          ul.nav.navbar-nav.navbar-right
+            a.btn.btn-primary.btn-lg(href='Sign Up Screen.html', role='button') SIGN UP
+    .container
+      .container.inner-container-1
+        .panel.panel-default
+          .panel-heading Sign Up
+          .panel-body
+            form
+              .form-group
+                label(for='fName') First Name:
+                input#fName.form-control(type='text', placeholder='Enter First Name')
+              .form-group
+                label(for='lName') First Name:
+                input#lName.form-control(type='text', placeholder='Enter Last Name')
+              .form-group
+                label(for='email') Email Address:
+                input#email.form-control(type='email', placeholder='Enter Email Address')
+              .form-group
+                label(for='pwd') Password:
+                input#pwd.form-control(type='password', placeholder='Enter Password')
+              .form-group
+                label(for='sAdd') Street Address:
+                input#sAdd.form-control(type='text', placeholder='Enter Street Address')
+              .container.inner-container-2
+                h4
+                  | I am a...
+                  h4
+                    input.btn.btn-primary.btn-sm(type='button', value='BLOCK CAPTAIN')
+                    input.btn.btn-primary.btn-sm(type='button', value='COORDINATOR')
+          .panel-footer
+            .container.inner-container-3
+              a#cancel.btn.btn-default(href='Front Page.html', name='cancel') Cancel
+              // The following part doesn't work ;(
+              button#submit.btn.btn-primary(type='submit', onclick='Confirm()') Submit
+              script.
+                function Confirm() {
+                if (BLOCK CAPTAIN) {
+                alert("Thank you. A BlockCaptain Administrator will contact you shortly with confirmation as a Block Captain.");
+                }
+                else {
+                alert("Thank you. A BlockCaptain Administrator will contact you shortly with confirmation as a Coordinator.");
+                }

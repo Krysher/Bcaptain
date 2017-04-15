@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BlockCaptin Netwrok</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    .navbar {
+      background-color:#000066;
+    }
+
+    .nav.navbar-nav.navbar-left li a {
+      color: yellow;
+    }
+
+    .container { 
+      margin: auto;
+      width: 25%;
+      transform: translateY(50%);
+    }
+
+    .form-actions {
+      margin: 0;
+      text-align: center;
+    }
+
+    body {
+      background-image: url(philadelphia.jpg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+ <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>                        
+       </button>
+       <a class="navbar-brand" href="#">BlockCaptin Network</a>
+     </div>
+     <div class="collapse navbar-collapse" id="myNavbar">
+       <ul class="nav navbar-nav navbar-left">
+         <li class="active"><a href="#">SIGN IN</a></li>
+         <li><a href="About Block Captain Screen.html">ABOUT BLOCK CAPTIN</a></li>
+         <li><a href="#">CONTACT US</a></li>
+       </ul>
+       <ul class="nav navbar-nav navbar-right">
+         <a href="#" class="btn btn-primary btn-lg" role="button">SIGN UP</a>
+       </ul>
+     </div>
+   </div>
+ </nav>
+
+ <div class="container">
+  <form>
+    <div class="form-group">
+      <label for="usr">Username:</label>
+      <input type="text" class="form-control" id="usr" placeholder="Enter Username">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter Password">
+     </div>
+    <a href="#" class="btn btn-link" role="button">Forgot Username or Password?</a>
+    <div class="form-actions">
+      <button type="SIGN IN" class="btn btn-primary">SIGN IN</button>
+  </form>
+ </div>
+</body>
+
+</html>

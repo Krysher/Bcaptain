@@ -6,7 +6,9 @@ block content
 	include modals/updateNews
 	include leftnavbar
 	link(rel='stylesheet', href='/css/manage-override.css')
-	link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css')
+	link(rel='stylesheet', href='/css/jquery-ui-timepicker-addon.css')
+	link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+
 
 	// preset form values if we receive a userdata object //
 	- user = typeof(udata) != 'undefined' ? udata : { }
@@ -75,22 +77,6 @@ block content
 									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveNews('#{accts[i]._id}')")
 										span.glyphicon.glyphicon-trash
 
-script.
-	$(document).ready(function(){
-	$("#mytable #checkall").click(function () {
-	if ($("#mytable #checkall").is(':checked')) {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", true);
-	});
-	} else {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", false);
-	});
-	}
-	});
-	$("[data-toggle=tooltip]").tooltip();
-	});
-
 
 block scripts
 	script(src='/vendor/jquery.form.min.js')
@@ -98,11 +84,29 @@ block scripts
 	script(src='/js/views/home.js')
 	script(src='/js/controllers/homeController.js')
 	script(src='/js/form-validators/accountValidator.js')
-	script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js')
+	script(src='//code.jquery.com/ui/1.12.1/jquery-ui.js')
+	script(src='/js/jquery-ui-timepicker-addon.js')
 	script.
+		$(document).ready(function(){
+		$('#datetimepicker').datetimepicker();
+		$('#datetimepickers').datetimepicker();
+		$("#mytable #checkall").click(function () {
+		if ($("#mytable #checkall").is(':checked')) {
+		$("#mytable input[type=checkbox]").each(function () {
+		$(this).prop("checked", true);
+		});
+		} else {
+		$("#mytable input[type=checkbox]").each(function () {
+		$(this).prop("checked", false);
+		});
+		}
+		});
+		$("[data-toggle=tooltip]").tooltip();
+		
+		});
 		var hcc = new HomeController();
 		function toggle(source) {
-		checkboxes = document.getElementsByName('chek');
+		checkboxes = document.getElementsByName('check');
 		for(var i=0, n=checkboxes.length;i<n;i++) {
 		checkboxes[i].checked = source.checked;
 		}

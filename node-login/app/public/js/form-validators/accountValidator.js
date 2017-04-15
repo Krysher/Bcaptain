@@ -1,10 +1,22 @@
+$("#select_bc").click(function(){
+   $("#select_co").removeClass("active");
+   $("#select_bc").addClass("active");
+	role = 'bc';
+});
+
+$("#select_co").click(function(){
+   $("#select_bc").removeClass("active");
+   $("#select_co").addClass("active");
+	role = 'co';
+});
+
 
 function AccountValidator()
 {
 // build array maps of the form inputs & control groups //
 
-	this.formFields = [$('#name-tf'), $('#email-tf'), $('#user-tf'), $('#pass-tf')];
-	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg')];
+	this.formFields = [$('#name-tf'), $('#email-tf'), $('#user-tf'), $('#pass-tf'), $('#conf-pass-tf'), $('#select_bc'), $('#select_co')];
+	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg'), $('confirmpass-cg'), $('role-cg')];
 	
 // bind the form-error modal window to this controller to display any errors //
 	
@@ -13,7 +25,12 @@ function AccountValidator()
 	
 	this.validateName = function(s)
 	{
-		return s.length >= 3;
+		if (s) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	this.validatePassword = function(s)
@@ -24,6 +41,11 @@ function AccountValidator()
 		}	else{
 			return s.length >= 6;
 		}
+	}
+	
+		this.validateConfirmPassword = function(s,ss)
+	{
+		return s === ss;
 	}
 	
 	this.validateEmail = function(e)
@@ -72,6 +94,14 @@ AccountValidator.prototype.validateForm = function()
 	if (this.validatePassword(this.formFields[3].val()) == false) {
 		this.controlGroups[3].addClass('error');
 		e.push('Password Should Be At Least 6 Characters');
+	}
+	if (this.validateConfirmPassword(this.formFields[3].val(), this.formFields[4].val()) == false) {
+		this.controlGroups[4].addClass('error');
+		e.push('Your passwords Did Not Match');
+	}
+	if (typeof role == 'undefined') {
+		this.controlGroups[5].addClass('error');
+		e.push('Please Select Your Role');
 	}
 	if (e.length) this.showErrors(e);
 	return e.length === 0;

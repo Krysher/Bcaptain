@@ -76,6 +76,15 @@ exports.getAllRecords = function(callback)
 	});
 }
 
+exports.getAllEvent = function(callback)
+{
+	news.find().toArray(
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+}
+
 exports.delAllRecords = function(callback)
 {
 	news.remove({}, callback); // reset news collection for testing //
