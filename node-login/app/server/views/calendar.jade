@@ -6,9 +6,6 @@ block content
 	include leftnavbar
 	link(rel='stylesheet', href='/css/manage-override.css')
 	link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css')
-
-
-
 	.container
 		#navbar.navbar.navbar-default(data-spy='affix')
 			.container
@@ -31,29 +28,10 @@ block content
 						li
 							a(href='/contact') Contact
 
+
 		.row
 			#calendar
 			
-
-script.
-	$(document).ready(function(){
-
-
-	$("#mytable #checkall").click(function () {
-	if ($("#mytable #checkall").is(':checked')) {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", true);
-	});
-	} else {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", false);
-	});
-	}
-	});
-	$("[data-toggle=tooltip]").tooltip();
-
-	});
-
 
 block scripts
 	script(src='/vendor/jquery-2.2.3.min.js')
@@ -66,25 +44,80 @@ block scripts
 	script.
 		var hcc = new HomeController();
 		$(document).ready(function() {
-		// page is now ready, initialize the calendar...
-
-
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-
-
-
-		$('#calendar').fullCalendar({
-
-		editable: true,
-
-		events: [
-		{
-		title: 'All Day Event',
-		start: new Date(y, m, 1)
+		var calEnd = function (time, duration) {
+		var time_in_mili = new Date(time).getTime()
+		var dur_in_mili = duration * 60 * 60 * 1000
+		var end_in_mili = time_in_mili + dur_in_mili
+		var end = new Date(end_in_mili).toLocaleDateString() + " " + new Date(end_in_mili).toLocaleTimeString('en-GB')
+		return end;
 		}
-		]
-		})
+		
+		var cal_color = function (event_type) {
+		if (event_type == "Notice") {
+		return "red";
+		} else if (event_type == "Information") {
+		return "blue";
+		} else {
+		return "green";
+		}
+		}
+		
+		
+		var news_data = !{JSON.stringify(newsData)};
+		var endTime = [];
+		//endTime.push(calEnd(news_data[0]['event_date'], news_data[0]['event_duration']));
+		console.log(news_data);
+		var event_obj_date = JSON.stringify(news_data)
+		/*
+		var holidayObj = [{
+			"holidayName": "Boxing Day",
+			"holidayStart": "04/21/2017 13:00",
+			"holidayEnd": "04/21/2017 16:00"
+		}, {
+			"holidayName": "Some other Day",
+			"holidayStart": "23 Oct 2017 13:00:00 EST",
+			"holidayEnd": "23 Oct 2017 13:00:00 EST"
+		}
+		];		*/
+		
+		// page is now ready, initialize the calendar...
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'agendaDay,agendaTwoDay,agendaWeek,month'
+				},
+				views: {
+					agendaTwoDay: {
+						type: 'agenda',
+						duration: { days: 2 },
+
+						// views that are more than a day will NOT do this behavior by default
+						// so, we need to explicitly enable it
+						groupByResource: true
+
+						//// uncomment this line to group by day FIRST with resources underneath
+						//groupByDateAndResource: true
+					}
+				},
+				events: []
+			})
+
+		$.each(JSON.parse(event_obj_date), function (i, item) {
+		event_eventname = item.event_name;
+		event_eventstart = item.event_date; //May, 26 Oct 2014 13:00:00 EST
+		event_eventend = calEnd(item.event_date, item.event_duration); //May, 26 Oct 2014 13:00:00 EST
+		event_type = cal_color(item.event_type);
+		var eventObject = {
+			title: event_eventname,
+			start: event_eventstart,
+			end  : event_eventend,
+			color: event_type,
+			allDay: false
+		};
+		$('#calendar').fullCalendar('renderEvent', eventObject, true);
+		//console.log(eventObject.start);
 		});
+
+		});
+

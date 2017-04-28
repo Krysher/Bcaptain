@@ -8,7 +8,7 @@ var moment 		= require('moment');
 	ESTABLISH DATABASE CONNECTION
 */
 
-var dbName = process.env.DB_NAME || 'events';
+var dbName = process.env.DB_NAME || 'newsletter';
 var dbHost = process.env.DB_HOST || 'localhost'
 var dbPort = process.env.DB_PORT || 27017;
 
@@ -32,7 +32,7 @@ db.open(function(e, d){
 	}
 });
 
-var news = db.collection('news');
+var news = db.collection('newsletter');
 
 /* record insertion, update & deletion methods */
 

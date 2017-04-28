@@ -41,8 +41,21 @@ function HomeController()
 	}
 
 
-
-
+/*
+	this.getCalendnar = function(userId) {
+		$.ajax({
+			url: '/getCalendar',
+			type: 'POST',
+			data: { id: $('#userId').val()},  //this is practically a god damn backdoor (big vulnerability)
+			success: function(data){
+				return newsData;
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+*/
 
 	this.AddResident = function()
 	{
@@ -153,15 +166,17 @@ function HomeController()
 
 		this.addNews = function()
 	{
-		var event_name = $('input[name=event_name]').val();
-		var event_type = $('select[name=event_type]').val();
-		var event_date = $('input[name=event_date]').val();
-		var creator    = $('input[name=creator]').val();
+		var event_name     = $('input[name=event_name]').val();
+		var event_type     = $('select[name=event_type]').val();
+		var event_duration = $('input[name=event_duration]').val();
+		var event_date     = $('input[name=event_date]').val();
+		var creator        = $('input[name=creator]').val();
 		var that = this;
+		console.log(event_duration);
 		$.ajax({
 			url: '/addNews',
 			type: 'POST',
-			data: { en: event_name, et: event_type, ed: event_date, creator: creator},
+			data: { en: event_name, edur: event_duration, et: event_type, ed: event_date, creator: creator},
 			success: function(data){
 				$('.addNews').modal('hide');
 	 			that.showLockedAlertNM('Succesfully added Event');
@@ -174,12 +189,13 @@ function HomeController()
 
 
 
-	this.showUpdateNews = function(event_name, event_type, event_date, event_id) {
+	this.showUpdateNews = function(event_name, event_type, event_duration, event_date, event_id) {
 		//console.log(event_name);
 		$('.updateNews').on('show.bs.modal', function(event) {
 			$(".updateNews").find('input[name="event_name"]').val(event_name);
 			$(".updateNews").find('select[name="event_type"]').val(event_type);
 			$(".updateNews").find('input[name="event_date"]').val(event_date);
+			$(".updateNews").find('input[name="event_duration"]').val(event_duration);
 			$(".updateNews").find('input[name="event_id"]').val(event_id);
 		})
 
@@ -195,13 +211,14 @@ function HomeController()
 		var event_name = $('#event_name').val();
 		var event_type = $('#event_type').val();
 		var event_date = $(".updateNews").find('input[name="event_date"]').val();
+		var event_duration = $(".updateNews").find('input[name="event_duration"]').val();
 		var event_id = $('input[name=event_id]').val(); 
-		console.log(event_date);
+		console.log(event_duration);
 		var that = this;
 		$.ajax({
 			url: '/updateNews',
 			type: 'POST',
-			data: { id: event_id, en: event_name, et: event_type, ed: event_date},
+			data: { id: event_id, en: event_name, edur: event_duration, et: event_type, ed: event_date},
 			success: function(data){
 				$('.updateNews').modal('hide');
 	 			that.showLockedAlertNM('Succesfully Update Event Information');

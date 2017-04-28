@@ -13,9 +13,9 @@
 							input.form-control#event_name(type='text', name='event_name', value="").form-control
 							input.form-control#name-tf(type='hidden', name='event_id', value="")
 					.form-group
-						label.control-label.col-sm-3 Duration (Hour)
+						label.control-label.col-sm-3 Event End Time
 						.col-sm-9
-							input.form-control#event_length(type='text', name='event_length', value="").form-control
+							input.form-control#event_length(type='number', step='.1', name='event_duration', value="").form-control
 					.form-group
 						label.control-label.col-sm-3 Event Type
 						.col-sm-9
@@ -24,7 +24,7 @@
 								option(value='Notice') Notice
 								option(value='Information') Information
 					.form-group
-						label.control-label.col-sm-3 Event Date
+						label.control-label.col-sm-3 Start Date and Time
 						.col-sm-9
 							input#datetimepickers(type='text', name='event_date').form-control
 					.form-group

@@ -2,7 +2,7 @@ var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 var RM = require('./modules/resident-manager');
 var NM = require('./modules/news-manager');
-
+var NL = require('./modules/newsletter-manager')
 module.exports = function(app) {
 
 // main login page //
@@ -216,9 +216,22 @@ module.exports = function(app) {
 		}
 		else {
 			NM.getAllRecords( function(e, news){
-				console.log(news);
-				res.render('calendar', {  title: 'Manage your calendar', accts: news, udata: req.session.user });
+				res.render('calendar', {  title: 'Manage your calendar', newsData: news, udata: req.session.user });
 			})
+		}
+	});
+		app.get('/newsletters', function(req, res) {
+		if (req.session.user == null){
+			res.redirect('/');
+		}
+		else {
+			NM.getAllRecords( function(e, news){
+				RM.getAllRecords( function(e, accounts){
+					NL.getAllRecords( function(e, newsletters){
+						res.render('newsletter', {  title: 'Manage your newsletter', letterData: newsletters, newsData: news, acctData: accounts, udata: req.session.user });
+					});
+				});
+			});
 		}
 	});
 		app.get('/news', function(req, res) {
@@ -261,10 +274,11 @@ module.exports = function(app) {
 
 		app.post('/addNews', function(req, res){
 		NM.addNews({
-			event_name 	: req.body.en,
-			event_type 	: req.body.et,
-			event_date  : req.body.ed,
-			creator     : req.body.creator,
+			event_name 	   : req.body.en,
+			event_type 	   : req.body.et,
+			event_duration : req.body.edur,
+			event_date     : req.body.ed,
+			creator        : req.body.creator,
 		}, function(e){
 			if (e){
 				res.status(400).send(e);
@@ -278,10 +292,11 @@ module.exports = function(app) {
 	app.post('/updateNews', function(req, res){
 		//console.log(req.body);
 		NM.updateNews({
-			id          : req.body.id,
-			event_name 	: req.body.en,
-			event_type 	: req.body.et,
-			event_date  : req.body.ed,
+			id             : req.body.id,
+			event_name 	   : req.body.en,
+			event_duration : req.body.edur,
+			event_type 	   : req.body.et,
+			event_date     : req.body.ed,
 		}, function(e, o){
 			if (e){
 				res.status(400).send('error-updating-account');
