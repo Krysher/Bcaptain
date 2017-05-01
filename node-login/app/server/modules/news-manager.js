@@ -66,9 +66,9 @@ exports.deleteNews = function(id, callback)
 }
 
 
-exports.getAllRecords = function(callback)
+exports.getAllRecords = function(callback, callerID)
 {
-	news.find().toArray(
+	news.find({creatorID: callerID}).toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)

@@ -207,7 +207,7 @@ module.exports = function(app) {
 			else {
 			RM.getAllRecords( function(e, accounts){
 				res.render('manage', {  title: 'Manage your block', accts: accounts, udata: req.session.user });
-			})
+			}, req.session.user._id)
 		}
 	});
 		app.get('/calendar', function(req, res) {
@@ -217,7 +217,7 @@ module.exports = function(app) {
 		else {
 			NM.getAllRecords( function(e, news){
 				res.render('calendar', {  title: 'Manage your calendar', newsData: news, udata: req.session.user });
-			})
+			}, req.session.user._id)
 		}
 	});
 		app.get('/newsletters', function(req, res) {
@@ -229,9 +229,9 @@ module.exports = function(app) {
 				RM.getAllRecords( function(e, accounts){
 					NL.getAllRecords( function(e, newsletters){
 						res.render('newsletter', {  title: 'Manage your newsletter', letterData: newsletters, newsData: news, acctData: accounts, udata: req.session.user });
-					});
-				});
-			});
+					}, req.session.user._id);
+				}, req.session.user._id);
+			}, req.session.user._id);
 		}
 	});
 		app.get('/news', function(req, res) {
@@ -241,7 +241,7 @@ module.exports = function(app) {
 		else {
 			NM.getAllRecords( function(e, news){
 				res.render('news', {  title: 'Manage your News', accts: news, udata: req.session.user });
-			})
+			}, req.session.user._id)
 		}
 	});
 
@@ -262,7 +262,8 @@ module.exports = function(app) {
 			firstname 	: req.body.fn,
 			lastname 	: req.body.ln,
 			email 		: req.body.email,
-			address 	: req.body.address
+			address 	: req.body.address,
+			creatorID   : req.body.creatorID
 		}, function(e){
 			if (e){
 				res.status(400).send(e);
@@ -279,6 +280,7 @@ module.exports = function(app) {
 			event_duration : req.body.edur,
 			event_date     : req.body.ed,
 			creator        : req.body.creator,
+			creatorID      : req.body.creatorID
 		}, function(e){
 			if (e){
 				res.status(400).send(e);

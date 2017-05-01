@@ -13,7 +13,8 @@
 						label.control-label.col-sm-3 Event Name
 						.col-sm-9
 							input.form-control#name-tf(type='text', name='event_name').required
-							input(type='hidden', name='creator', value= user.user)
+							input(type='hidden', name='creator', value= user.firstname)
+							input(type='hidden', name='creatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 Duration (Hour)
 						.col-sm-9

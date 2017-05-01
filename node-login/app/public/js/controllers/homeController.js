@@ -63,12 +63,13 @@ function HomeController()
 		var Rlastname = $('input[name=Rlastname]').val();
 		var Remail = $('input[name=Remail]').val();
 		var Raddress = $('input[name=Raddress]').val();
+		var RcreatorID = $('input[name=RcreatorID]').val();
 
 		var that = this;
 		$.ajax({
 			url: '/addresident',
 			type: 'POST',
-			data: { fn: Rfirstname, ln: Rlastname, email: Remail, address: Raddress},
+			data: { fn: Rfirstname, ln: Rlastname, email: Remail, address: Raddress, creatorID: RcreatorID},
 			success: function(data){
 				$('.addResident').modal('hide');
 	 			that.showLockedAlertWO('Succesfully added Resident');
@@ -120,16 +121,6 @@ function HomeController()
 
 
 
-
-
-
-
-
-
-
-
-
-
 	this.removeResident = function(userId)
 	{
 		$('.modal-confirm1').modal('hide');
@@ -171,12 +162,13 @@ function HomeController()
 		var event_duration = $('input[name=event_duration]').val();
 		var event_date     = $('input[name=event_date]').val();
 		var creator        = $('input[name=creator]').val();
+		var creatorID      = $('input[name=creatorID]').val();
 		var that = this;
 		console.log(event_duration);
 		$.ajax({
 			url: '/addNews',
 			type: 'POST',
-			data: { en: event_name, edur: event_duration, et: event_type, ed: event_date, creator: creator},
+			data: { en: event_name, edur: event_duration, et: event_type, ed: event_date, creator: creator, creatorID: creatorID},
 			success: function(data){
 				$('.addNews').modal('hide');
 	 			that.showLockedAlertNM('Succesfully added Event');

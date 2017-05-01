@@ -1,4 +1,6 @@
 .addResident.modal.fade
+	// preset form values if we receive a userdata object //
+	- user = typeof(udata) != 'undefined' ? udata : { }
 	.modal-dialog
 		.modal-content
 			.modal-header
@@ -11,6 +13,7 @@
 						label.control-label.col-sm-3 First Name
 						.col-sm-9
 							input.form-control#name-tf(type='text', name='Rfirstname').required
+							input(type='hidden', name='RcreatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 Last Name
 						.col-sm-9

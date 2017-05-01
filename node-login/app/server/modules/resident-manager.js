@@ -38,23 +38,15 @@ var accounts = db.collection('accounts');
 /* record insertion, update & deletion methods */
 
 exports.addNewAccount = function(newData, callback)
-	{
-	accounts.findOne({email:newData.email}, function(e, o) {
-		if (o){
-			callback('email-taken');
-		}	else
-		{
-			newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-			accounts.insert(newData, {safe: true}, callback);
-		};
-		}
-);
+{
+	newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+	accounts.insert(newData, {safe: true}, callback);
 }
 exports.updateAccount = function(newData, callback)
 {
 	accounts.findOne({_id:getObjectId(newData.id)}, function(e, o){
 		o.firstname 	= newData.firstname;
-		o.last    	    = newData.lastname;
+		o.lastname    	= newData.lastname;
 		o.email 	    = newData.email;
 		o.address       = newData.address;
 		accounts.save(o, {safe: true}, function(e) {
@@ -96,9 +88,9 @@ exports.getAccountByEmail = function(email, callback)
 }
 
 
-exports.getAllRecords = function(callback)
+exports.getAllRecords = function(callback, callerID)
 {
-	accounts.find().toArray(
+	accounts.find({creatorID: callerID}).toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)
