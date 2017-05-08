@@ -31,6 +31,10 @@
 						.col-sm-9
 							input#datetimepicker(type='text', name='event_date').form-control
 					.form-group
+						label.control-label.col-sm-3 Description
+						.col-sm-9
+							textarea#eventDescription.form-control(rows='5')
+					.form-group
 						.form-button
 							button(type='button', onclick="$('.addNews').modal('hide');")#addresident-form-btn1.btn.btn-default
 							button(type='button' onclick="hcc.addNews(); ")#addresident-form-btn2.btn.btn-primary

@@ -189,12 +189,6 @@ module.exports = function(app) {
 	    });
 	});
 	
-	app.get('/reset', function(req, res) {
-		AM.delAllRecords(function(){
-			res.redirect('/print');	
-		});
-	});
-	
 	app.get('/about', function(req, res) {
 		res.render('about', {  title: 'About the team'});
 	});
@@ -254,9 +248,6 @@ module.exports = function(app) {
 
 
 //Resident update and add
-
-
-
 	app.post('/addresident', function(req, res){
 		RM.addNewAccount({
 			firstname 	: req.body.fn,
@@ -279,6 +270,7 @@ module.exports = function(app) {
 			event_type 	   : req.body.et,
 			event_duration : req.body.edur,
 			event_date     : req.body.ed,
+			event_dec	   : req.body.dec,
 			creator        : req.body.creator,
 			creatorID      : req.body.creatorID
 		}, function(e){
@@ -290,6 +282,19 @@ module.exports = function(app) {
 		});
 	});
 
+		app.post('/addNewsletter', function(req, res){
+		NM.addNews({
+			newsletter_name 	   : req.body.nn,
+			newsletter_receipt 	   : req.body.nr,
+			newsletter_body		   : req.body.nb,
+		}, function(e){
+			if (e){
+				res.status(400).send(e);
+			}	else{
+				res.status(200).send('ok');
+			}
+		});
+	});
 
 	app.post('/updateNews', function(req, res){
 		//console.log(req.body);
@@ -299,6 +304,7 @@ module.exports = function(app) {
 			event_duration : req.body.edur,
 			event_type 	   : req.body.et,
 			event_date     : req.body.ed,
+			event_dec	   : req.body.dec,
 		}, function(e, o){
 			if (e){
 				res.status(400).send('error-updating-account');
@@ -346,12 +352,5 @@ module.exports = function(app) {
 			}
 	    });
 	});
-
-
-
-
-
-
-
 
 };

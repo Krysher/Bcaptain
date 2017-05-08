@@ -17,6 +17,19 @@ block content
 	
 
 	.container
+		#myModal.modal.fade(role='dialog')
+			.modal-dialog.modal-sm
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal') ×
+						h4.modal-title Modal Header
+					.modal-body
+						p This is a small modal.
+					.modal-footer
+						button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+
+
 		#navbar.navbar.navbar-default(data-spy='affix')
 			.container
 				.navbar-header
@@ -87,7 +100,7 @@ block content
 						form
 							.form-group
 								label(for='InputNLName') Newsletter Name
-								input#InputNLName.form-control(type='name', placeholder='Enter newsletter')
+								input#InputNLName.form-control(type='name', placeholder='Enter newsletter name')
 
 					h1 Choose News
 					div
@@ -101,14 +114,16 @@ block content
 								th Created By
 							tbody
 							- for (var i = 0; i < newsData.length; i++)
-								tr(name="#{newsData[i].event_type}")
+								tr(name="#{newsData[i].event_type}", id='newsTable')
 									td
-										input.form-check-input(type='checkbox', value='')
+										input.form-check-input(type='checkbox', name='case[]', value='')
+									td(style='display: none')= newsData[i]._id
 									td= newsData[i].event_name
 									td= newsData[i].event_type
 									td= newsData[i].event_date
 									td= newsData[i].event_duration + ' Hours'
 									td= newsData[i].creator
+									td(style='display: none')= newsData[i].event_dec
 					h1 Choose Resident
 					div
 						table#mytable.table.table-bordred.table-striped
@@ -123,14 +138,15 @@ block content
 							- for (var i = 0; i < acctData.length; i++)
 								tr
 									td
-										input.form-check-input(type='checkbox', value='')
+										input.form-check-input(type='checkbox', name='user_selected[]', value='')
+									td(style='display: none')= acctData[i]._id
 									td= acctData[i].firstname
 									td= acctData[i].lastname
 									td= acctData[i].email
 									td= acctData[i].address
 									td= acctData[i].date
 					h1 Confirm and Send
-					div Radnom crap 2
+					div
 
 
 
@@ -148,6 +164,8 @@ block scripts
 	
 	
 	script.
+		theName = "#{user.firstname}" + " " + "#{user.lastname}";
+		theAddress = "#{user.address}";
 		$(document).ready(function(){
 		var hcc = new HomeController();
 		function toggle(source) {

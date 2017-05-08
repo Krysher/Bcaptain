@@ -163,12 +163,13 @@ function HomeController()
 		var event_date     = $('input[name=event_date]').val();
 		var creator        = $('input[name=creator]').val();
 		var creatorID      = $('input[name=creatorID]').val();
+		var event_dec	   = $('#eventDescription').val();
 		var that = this;
 		console.log(event_duration);
 		$.ajax({
 			url: '/addNews',
 			type: 'POST',
-			data: { en: event_name, edur: event_duration, et: event_type, ed: event_date, creator: creator, creatorID: creatorID},
+			data: { en: event_name, edur: event_duration, et: event_type, ed: event_date, dec: event_dec, creator: creator, creatorID: creatorID},
 			success: function(data){
 				$('.addNews').modal('hide');
 	 			that.showLockedAlertNM('Succesfully added Event');
@@ -181,7 +182,7 @@ function HomeController()
 
 
 
-	this.showUpdateNews = function(event_name, event_type, event_duration, event_date, event_id) {
+	this.showUpdateNews = function(event_name, event_type, event_duration, event_date, event_id, event_dec) {
 		//console.log(event_name);
 		$('.updateNews').on('show.bs.modal', function(event) {
 			$(".updateNews").find('input[name="event_name"]').val(event_name);
@@ -189,6 +190,7 @@ function HomeController()
 			$(".updateNews").find('input[name="event_date"]').val(event_date);
 			$(".updateNews").find('input[name="event_duration"]').val(event_duration);
 			$(".updateNews").find('input[name="event_id"]').val(event_id);
+			$(".updateNews").find('#eventDescription').val(event_dec);
 		})
 
 		$('.updateNews').modal('show');
@@ -200,17 +202,17 @@ function HomeController()
 
 	this.UpdateNews = function()
 	{
-		var event_name = $('#event_name').val();
-		var event_type = $('#event_type').val();
-		var event_date = $(".updateNews").find('input[name="event_date"]').val();
-		var event_duration = $(".updateNews").find('input[name="event_duration"]').val();
-		var event_id = $('input[name=event_id]').val(); 
-		console.log(event_duration);
+		var event_name 		= $('#event_name').val();
+		var event_type 		= $('#event_type').val();
+		var event_date 		= $(".updateNews").find('input[name="event_date"]').val();
+		var event_duration  = $(".updateNews").find('input[name="event_duration"]').val();
+		var event_id 		= $('input[name=event_id]').val(); 
+		var event_dec	    = $(".updateNews").find('#eventDescription').val();
 		var that = this;
 		$.ajax({
 			url: '/updateNews',
 			type: 'POST',
-			data: { id: event_id, en: event_name, edur: event_duration, et: event_type, ed: event_date},
+			data: { id: event_id, en: event_name, edur: event_duration, et: event_type, ed: event_date, dec: event_dec},
 			success: function(data){
 				$('.updateNews').modal('hide');
 	 			that.showLockedAlertNM('Succesfully Update Event Information');
@@ -220,10 +222,6 @@ function HomeController()
 			}
 		});
 	}
-
-
-
-
 
 	this.removeNews = function(userId)
 	{
@@ -298,3 +296,180 @@ HomeController.prototype.onUpdateSuccess = function()
 	$('.modal-alert button').off('click');
 }
 
+//things are getting complicated
+
+
+function get_selected(ele) {
+ var event_selected = new Array();
+       $.each($("input[name='case[]']:checked"), function() {
+           var data = $(this).parents('tr:eq(0)');
+           event_selected.push({ 'event_id':$(data).find('td:eq(1)').text(), 'event_name':$(data).find('td:eq(2)').text(), 'event_type':$(data).find('td:eq(3)').text(), 'event_date':$(data).find('td:eq(4)').text(), 'event_duration':$(data).find('td:eq(5)').text(), 'event_dec':$(data).find('td:eq(7)').text()});             
+       });
+ var resident_selected = new Array();
+       $.each($("input[name='user_selected[]']:checked"), function() {
+           var data = $(this).parents('tr:eq(0)');
+           resident_selected.push({ 'resident_id':$(data).find('td:eq(1)').text(), 'resident_firstname':$(data).find('td:eq(2)').text() , 'resident_email':$(data).find('td:eq(4)').text()});             
+       });
+    //console.log(values);
+    //console.log(user_array);
+    return {event: event_selected, resident: resident_selected};
+ }
+
+ function generate_preview() {
+ 	var title = document.getElementById('InputNLName').value;
+ 	var event_template = "";
+ 	var now_date = moment().format("MM/DD/YYYY");
+ 	var myEvent = get_selected()["event"];
+ 	var myEvent_length = myEvent.length;
+ 	for (var i = 0; i < myEvent_length; i++) {
+ 		var local_template = `
+ 		<div ID="${myEvent[i]['event_type']}">
+          Events
+            <!--Event Template - use this section as the template for each entry w/correct clases. Should be easy w/ DOM.-->
+            <div class="eventTitle">
+              ${myEvent[i]['event_name']} - ${myEvent[i]['event_date']} for ${myEvent[i]['event_duration']}
+            </div>
+            <div class="${myEvent[i]['event_type']}Desc">
+              ${myEvent[i]['event_dec']}
+            </div>
+        </div>
+        <br>
+        `
+        event_template += local_template;
+ 	}
+ 	var data = `
+  <style>
+	body {
+	  background: rgb(204,204,204); 
+	}
+
+	page {
+	  background: white;
+	  display: block;
+	  margin: 0 auto;
+	  margin-bottom: 0.5cm;
+	  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+	  /*padding:20px;*/
+	}
+	page[size="letter"] {  
+	  width: 8.5in;
+	  height: 11in; 
+	}
+	@media print {
+	  body, page {
+		margin: 0;
+		box-shadow: 0;
+	  }
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	#mainHeaderLogo {
+	  display: flex;
+	  width: 46%;
+	  height: 13%;
+	  float: left;
+	  padding-top: 25px;
+	  padding-left: 25px;
+	}
+
+	#mainHeaderBCInfo {
+	  display: flex;
+	  width: 46%;
+	  height: 13%;
+	  max-width: 100%;
+	  max-height: 100%;
+	  float:right;
+	  font-size: 16pt;
+	  text-align: center;
+	  justify-content:center;
+	  align-items:center;
+	  padding-top: 25px;
+	  padding-right: 25px;
+	}
+
+	#newsletterTitle {
+	  display: block;
+	  clear:both;
+	  font-size: 20pt;
+	  text-align: center;
+	  vertical-align: top;
+	  padding-top: 15px;
+	  padding-bottom: 15px;
+	}
+
+	#Event, #Notice, #Information {
+	  display: block;
+	  clear:both;
+	  font-size: 18pt;
+	  text-align: left;
+	  vertical-align: top;
+	  margin-top: 5px;
+	  margin-bottom: 5px;
+	  margin-left: 25px;
+	  margin-right: 25px;
+	  padding-top: 5px;
+	  padding-bottom: 5px;
+	  padding-left: 5px;
+	  padding-right: 5px;
+	  background-clip:padding-box;
+	  border-radius: 10px;
+	}
+
+	#Event {
+	  background-color:#CBF3DC;
+	}
+
+	#Notice {
+	  background-color:#FCE7C4;
+	}
+
+	#Information {
+	  background-color:#CDE6F6;
+	}
+
+	.EventTitle, .NoticeTitle, .InfoTitle {
+	  display: block;
+	  clear:both;
+	  font-size: 16pt;
+	  text-align: left;
+	  vertical-align: top;
+	  padding-top: 5px;
+	  padding-bottom: 5px;
+	  padding-left: 30px;
+	}
+
+	.EventDesc, .NoticeDesc, .InformationDesc {
+	  display: block;
+	  clear:both;
+	  font-size: 14pt;
+	  text-align: left;
+	  vertical-align: top;
+	  padding-top: 5px;
+	  padding-bottom: 5px;
+	  padding-left: 45px;
+	}
+  </style>
+  	<page size="letter">
+
+      <!--Main header-->
+      <div ID="mainHeaderLogo">
+    		<img src="/images/logoHiRes.png" />
+      </div>
+    	<div ID="mainHeaderBCInfo">
+      	${theAddress}<br>${theName} – Block Captain<br>${now_date}
+  	  </div>
+
+      <!--Body-->
+      <div ID="newsletterTitle">
+      	${title}
+      </div>
+      ${event_template}
+  	</page>
+`
+ 	$("#wizard-p-3").html(data)
+ 	global_review = event_template;
+ }

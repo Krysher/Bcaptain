@@ -45,11 +45,13 @@ exports.addNews = function(newData, callback)
 
 exports.updateNews = function(newData, callback)
 {
+	console.log(newData);
 	news.findOne({_id:getObjectId(newData.id)}, function(e, o){
 		o.event_name 		= newData.event_name;
 		o.event_type 	    = newData.event_type;
 		o.event_duration    = newData.event_duration;
 		o.event_date 	    = newData.event_date;
+		o.event_dec         = newData.event_dec;
 		news.save(o, {safe: true}, function(e) {
 		if (e) callback(e);
 			else callback(null, o);

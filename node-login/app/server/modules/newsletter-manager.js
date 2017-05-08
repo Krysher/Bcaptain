@@ -43,20 +43,6 @@ exports.addNews = function(newData, callback)
 	news.insert(newData, {safe: true}, callback);
 }
 
-exports.updateNews = function(newData, callback)
-{
-	news.findOne({_id:getObjectId(newData.id)}, function(e, o){
-		o.event_name 		= newData.event_name;
-		o.event_type 	    = newData.event_type;
-		o.event_duration    = newData.event_duration;
-		o.event_date 	    = newData.event_date;
-		news.save(o, {safe: true}, function(e) {
-		if (e) callback(e);
-			else callback(null, o);
-		});
-	});
-}
-
 
 /* account lookup methods */
 
@@ -82,11 +68,6 @@ exports.getAllEvent = function(callback)
 		if (e) callback(e)
 		else callback(null, res)
 	});
-}
-
-exports.delAllRecords = function(callback)
-{
-	news.remove({}, callback); // reset news collection for testing //
 }
 
 /* private encryption & validation methods */

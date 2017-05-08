@@ -73,7 +73,7 @@ block content
 								td= accts[i].event_duration + ' Hours'
 								td= accts[i].creator
 								td
-									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateNews('#{accts[i].event_name}', '#{accts[i].event_type}',  '#{accts[i].event_duration}', '#{accts[i].event_date}', '#{accts[i]._id}')")
+									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateNews('#{accts[i].event_name}', '#{accts[i].event_type}',  '#{accts[i].event_duration}', '#{accts[i].event_date}', '#{accts[i]._id}', '#{accts[i].event_dec}')")
 										span.glyphicon.glyphicon-pencil
 								td
 									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveNews('#{accts[i]._id}')")

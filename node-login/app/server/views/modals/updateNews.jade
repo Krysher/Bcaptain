@@ -28,5 +28,9 @@
 						.col-sm-9
 							input#datetimepickers(type='text', name='event_date').form-control
 					.form-group
+						label.control-label.col-sm-3 Description
+						.col-sm-9
+							textarea#eventDescription.form-control(rows='5')
+					.form-group
 						button(type='button' onclick="$('.updateNews').modal('hide');")#updateResident-form-btn1.btn.btn-default
 						button(type='button' onclick="hcc.UpdateNews();")#updateResident-form-btn2.btn.btn-primary

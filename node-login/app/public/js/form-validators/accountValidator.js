@@ -39,7 +39,7 @@ function AccountValidator()
 		if ($('#userId').val() && s===''){
 			return true;
 		}	else{
-			return s.length >= 6;
+			return s.length >= 8;
 		}
 	}
 	
@@ -93,7 +93,7 @@ AccountValidator.prototype.validateForm = function()
 	}
 	if (this.validatePassword(this.formFields[3].val()) == false) {
 		this.controlGroups[3].addClass('error');
-		e.push('Password Should Be At Least 6 Characters');
+		e.push('Password Should Be At Least 8 Characters');
 	}
 	if (this.validateConfirmPassword(this.formFields[3].val(), this.formFields[4].val()) == false) {
 		this.controlGroups[4].addClass('error');

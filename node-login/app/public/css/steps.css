@@ -407,3 +407,10 @@
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
+#wizard-p-3 {
+    overflow-y: scroll;
+}
+
+#newsTable tr > *:nth-child(1) {
+    display: none;
+}
