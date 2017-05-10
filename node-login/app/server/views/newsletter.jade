@@ -87,9 +87,9 @@ block content
 								td= letterData[i].newletter_events_id.length
 								td= letterData[i].date
 								td
-									button.btn.btn-primary.btn-xs(type='button', style="background-color: blue", id='account1-form-btn1', onclick="hcc.sendMail(#{letterData[i]._id})")
+									button.btn.btn-primary.btn-xs(type='button', style="background-color: blue", id='account1-form-btn1', onclick="hcc.sendMail('#{letterData[i]._id}')")
 										span.glyphicon.glyphicon-envelope.blue
-									button.btn.btn-primary.btn-xs(type='button', style="background-color: green", id='account1-form-btn1', onclick="hcc.printMail(#{letterData[i]._id})")
+									button.btn.btn-primary.btn-xs(type='button', style="background-color: green", id='account1-form-btn1', onclick="hcc.printMail('#{letterData[i]._id}')")
 										span.glyphicon.glyphicon-print
 									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveNewsletter('#{letterData[i]._id}')")
 										span.glyphicon.glyphicon-trash

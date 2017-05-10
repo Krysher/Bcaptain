@@ -3,6 +3,8 @@ function HomeController()
 {
 // bind event listeners to button clicks //
 	var that = this;
+	//global var, bad!
+	dontUse = this;
 
 	var userId;
 // handle user logout //
@@ -274,9 +276,31 @@ function HomeController()
 	}
 
 
+
 //for NEWSLETTER
-		this.showRemoveNewsletter = function(newsletter_id)
-	{
+	this.printMail = function(newsletter_id) {
+		var construct_query = "/printnewsletters?q=" + newsletter_id;
+		window.location.replace(construct_query);
+	}
+
+	this.sendMail = function(newsletter_id) {
+		var that = this;
+		$.ajax({
+			url: "/sendOutEmail",
+			type: "POST",
+			data: {ni: newsletter_id},
+			success: function(data){
+	 			that.showLockedAlert('Email SENT.');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+		//maybe pop up an alert saying it is sent!
+		//window.location.replace(construct_query);
+	}
+
+	this.showRemoveNewsletter = function(newsletter_id) {
 		$('.modal-confirm3').modal('show');
 		$('.modal-confirm3 .submit').click(function(){ that.removeNewsletter(newsletter_id); });
 	}
@@ -320,8 +344,7 @@ function HomeController()
 	}
 }
 
-HomeController.prototype.onUpdateSuccess = function()
-{
+HomeController.prototype.onUpdateSuccess = function() {
 	$('.modal-alert').modal({ show : false, keyboard : true, backdrop : true });
 	$('.modal-alert .modal-header h4').text('Success!');
 	$('.modal-alert .modal-body p').html('Your account has been updated.');
@@ -332,6 +355,7 @@ HomeController.prototype.onUpdateSuccess = function()
 //things are getting complicated
 
 function get_everything() {
+	var that = this;
 	var allSelected = get_selected();
 	var resident_selected = allSelected["resident"];
 	var event_selected = allSelected["event"];
@@ -357,7 +381,7 @@ function get_everything() {
 		type: 'POST',
 		data: { nn: title, nr: selected_emails, ei: selected_events, nb: email_template},
 		success: function(data){
- 			alert('Succesfully added Newsletter');
+ 			dontUse.showLockedAlertNL('This Newsletter has been added.');
 		},
 		error: function(jqXHR){
 			console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -552,5 +576,3 @@ function get_selected(ele) {
            $(this).show();                
     });
 });
-
-

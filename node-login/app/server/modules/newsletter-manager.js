@@ -70,6 +70,16 @@ exports.getAllEvent = function(callback)
 	});
 }
 
+
+exports.printWithId = function(id, callback)
+{
+	news.findOne({_id: getObjectId(id)},
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+}
+
 /* private encryption & validation methods */
 
 
@@ -80,6 +90,7 @@ var getObjectId = function(id)
 
 var findById = function(id, callback)
 {
+	var id = id.substring(2);
 	news.findOne({_id: getObjectId(id)},
 		function(e, res) {
 		if (e) callback(e)

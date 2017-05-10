@@ -3,6 +3,73 @@ var EM = require('./modules/email-dispatcher');
 var RM = require('./modules/resident-manager');
 var NM = require('./modules/news-manager');
 var NL = require('./modules/newsletter-manager')
+var reachmail = require('./modules/reachmailapi.js');
+
+
+
+var sendOutEmail = function(newsletter) {
+	var reachmailTemplate = "";
+	//console.log(newsletter);
+	for (i = 0; i < newsletter.newsletter_receipt.length; i++) {
+		var temporary = newsletter.newsletter_receipt[i];
+		reachmailTemplate += "{ Address: '" + temporary + "'}"
+		var emailx = "hoangbui1337@gmail.com"
+	}
+	var escapedBody = newsletter.newsletter_body.replace(/"/g, '\\"');
+	console.log(reachmailTemplate)
+	console.log("AAAAAAAAAAAAAAAA")
+
+
+	var api = new reachmail({token: 'TIeQWYMm5aRz8JUZ_pFjUkgSh2cfst5uetYbagzc0XkUqNs7dUk2JBackABPcuw2'});
+
+//The following builds the content of the message
+	var body={
+		FromAddress: 'admin@blockcapta.in',
+		Recipients: [ reachmailTemplate
+		],
+	  	Headers: { 
+			Subject: 'BlockCaptain Network Newsletter' , 
+			From: 'BlockCaptain Network <admin@blockcapta.in>', 
+			'X-Company': 'BlockCaptain Network', 
+			'X-Location': 'Philadelphia' 
+		}, 
+		BodyHtml: "", 
+		Tracking: true
+	};
+	//JSON encode the message body for transmission
+	jsonBody = JSON.stringify(body);
+	console.log(jsonBody);
+
+	/* 
+	The function below retreieves the account GUID. Only when succefful will the 
+	function proceed to them schedule the message for delivery.
+	Information is printed to screen through the use of console.log(...)
+	*/
+	api.administrationUsersCurrent(function (http_code, response) {
+		if (http_code===200) {
+			AccountId=response.AccountId; //extracts account GUID from response obj
+			console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
+			//Next Function sends the message
+			api.easySmtpDelivery(AccountId, jsonBody, function (http_code, response) {
+				if (http_code===200) {
+					console.log("successful connection to EasySMTP API");
+					console.log(response);
+				}else { 
+					console.log("Oops, looks like an error on send. Status Code: " + http_code);
+					console.log("Details: " + response);
+				}
+			});
+		} else {
+			console.log("Oops, there was an error when trying to get the account GUID. Status Code: " + http_code);
+			console.log("Details: " + response);
+		}
+	});
+}
+
+
+
+
+
 module.exports = function(app) {
 
 // main login page //
@@ -240,7 +307,34 @@ module.exports = function(app) {
 	});
 
 
+		app.get('/printnewsletters', function(req, res) {
+		if (req.session.user == null){
+			res.redirect('/');
+		}
+		else {
+			//console.log(req.query.q);
+			NL.printWithId( req.query.q, function(e, news){
+				res.render('printnewsletters', {  title: 'Printing your news', newsletter: news });
+			})
+		}
+	});
 
+
+
+/*
+		app.post('/printnewsletters', function(req, res){
+		NL.findById(req.body.ni, function(e, obj){
+			if (!e){
+				console.log(res.body);
+				res.status(200).send('ok');
+			}	else{
+				res.status(400).send('record not found');
+			}
+	    });
+	});
+
+
+*/
 
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
@@ -283,7 +377,6 @@ module.exports = function(app) {
 	});
 
 	app.post('/addNewsletter', function(req, res){
-		console.log(req.body);
 		NL.addNewsletter({
 			newsletter_name 	   : req.body.nn,
 			newsletter_receipt 	   : req.body.nr,
@@ -297,6 +390,20 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+		app.post('/sendOutEmail', function(req, res) {
+		if (req.session.user == null){
+			res.redirect('/');
+		}
+		else {
+			//console.log(req.body.ni);
+			NL.printWithId( req.body.ni, function(e, news){
+				sendOutEmail(news);
+			})
+		}
+	});
+
+
 
 	app.post('/updateNews', function(req, res){
 		//console.log(req.body);
@@ -362,5 +469,6 @@ module.exports = function(app) {
 			}
 	    });
 	});
-
 };
+
+
