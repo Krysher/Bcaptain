@@ -28,7 +28,7 @@ magic.steps({
 	},
 	onFinished: function (event, currentIndex)
 	{
-		alert('wpp');
-    	  //send email, store data into database and voila!  	
+		get_everything();	
+    	//send email, store data into database and voila!  	
     }
 });

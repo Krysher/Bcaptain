@@ -25,7 +25,7 @@ function HomeController()
 			type: 'POST',
 			data: { id: $('#userId').val()},
 			success: function(data){
-	 			that.showLockedAlert('Your account has been deleted C.<br>Redirecting you back to the homepage.');
+	 			that.showLockedAlert('Your account has been deleted.<br>Redirecting you back to the homepage.');
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -240,6 +240,23 @@ function HomeController()
 		});
 	}
 
+	this.removeNewsletter = function(newsletter_id)
+	{
+		$('.modal-confirm3').modal('hide');
+		var that = this;
+		$.ajax({
+			url: '/delNewsletter',
+			type: 'POST',
+			data: { id: newsletter_id},
+			success: function(data){
+	 			that.showLockedAlertNL('This Newsletter has been deleted.');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+
 	this.attemptLogout = function()
 	{
 		var that = this;
@@ -255,6 +272,15 @@ function HomeController()
 			}
 		});
 	}
+
+
+//for NEWSLETTER
+		this.showRemoveNewsletter = function(newsletter_id)
+	{
+		$('.modal-confirm3').modal('show');
+		$('.modal-confirm3 .submit').click(function(){ that.removeNewsletter(newsletter_id); });
+	}
+
 
 	this.showLockedAlert = function(msg){
 		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
@@ -284,7 +310,14 @@ function HomeController()
 		$('.modal-alert button').click(function(){window.location.href = '/news';})
 		setTimeout(function(){window.location.href = '/news';}, 3000);
 	}
-
+	this.showLockedAlertNL = function(msg){
+		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
+		$('.modal-alert .modal-header h4').text('Success!');
+		$('.modal-alert .modal-body p').html(msg);
+		$('.modal-alert').modal('show');
+		$('.modal-alert button').click(function(){window.location.href = '/newsletters';})
+		setTimeout(function(){window.location.href = '/newsletters';}, 3000);
+	}
 }
 
 HomeController.prototype.onUpdateSuccess = function()
@@ -297,6 +330,41 @@ HomeController.prototype.onUpdateSuccess = function()
 }
 
 //things are getting complicated
+
+function get_everything() {
+	var allSelected = get_selected();
+	var resident_selected = allSelected["resident"];
+	var event_selected = allSelected["event"];
+	
+	console.log(event_selected);
+	var selected_emails = [];
+	var selected_events = [];
+	var email_template = global_review;
+	var title = document.getElementById('InputNLName').value;
+	for (var i = 0; i < resident_selected.length; i++) {
+		console.log(resident_selected.length);
+		var current_resident_email = resident_selected[i]["resident_email"];
+		selected_emails.push(current_resident_email);
+	}
+	for (var i = 0; i < event_selected.length; i++) {
+		console.log(i);
+		var current_events_id = event_selected[i]["event_id"];
+		selected_events.push(current_events_id);
+	}
+
+	$.ajax({
+		url: '/addNewsletter',
+		type: 'POST',
+		data: { nn: title, nr: selected_emails, ei: selected_events, nb: email_template},
+		success: function(data){
+ 			alert('Succesfully added Newsletter');
+		},
+		error: function(jqXHR){
+			console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+		}
+	});
+
+}
 
 
 function get_selected(ele) {
@@ -324,7 +392,7 @@ function get_selected(ele) {
  	for (var i = 0; i < myEvent_length; i++) {
  		var local_template = `
  		<div ID="${myEvent[i]['event_type']}">
-          Events
+          ${myEvent[i]['event_type']}
             <!--Event Template - use this section as the template for each entry w/correct clases. Should be easy w/ DOM.-->
             <div class="eventTitle">
               ${myEvent[i]['event_name']} - ${myEvent[i]['event_date']} for ${myEvent[i]['event_duration']}
@@ -471,5 +539,18 @@ function get_selected(ele) {
   	</page>
 `
  	$("#wizard-p-3").html(data)
- 	global_review = event_template;
+ 	global_review = data;
  }
+
+ $("#search").keyup(function() {
+    _this = this;
+    // Show only matching TR, hide rest of them
+    $.each($("table tbody tr"), function() {
+        if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+           $(this).hide();
+        else
+           $(this).show();                
+    });
+});
+
+

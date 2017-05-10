@@ -60,6 +60,13 @@ $(document).ready(function(){
 	$('.modal-confirm2 .submit').html('Delete');
 	$('.modal-confirm2 .submit').addClass('btn-danger');
 
+	$('.modal-confirm3').modal({ show : false, keyboard : true, backdrop : true });
+	$('.modal-confirm3 .modal-header h4').text('Delete Newsletter');
+	$('.modal-confirm3 .modal-body p').html('Are you sure you want to delete this Newsletter?');
+	$('.modal-confirm3 .cancel').html('Cancel');
+	$('.modal-confirm3 .submit').html('Delete');
+	$('.modal-confirm3 .submit').addClass('btn-danger');
+
 
 	$('.modal-confirm1').modal({ show : false, keyboard : true, backdrop : true });
 	$('#addresident-form-btn1').html('Cancel');

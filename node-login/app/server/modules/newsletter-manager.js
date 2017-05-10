@@ -36,7 +36,7 @@ var news = db.collection('newsletter');
 
 /* record insertion, update & deletion methods */
 
-exports.addNews = function(newData, callback)
+exports.addNewsletter = function(newData, callback)
 {
 	// append date stamp when record was created //
 	newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -46,7 +46,7 @@ exports.addNews = function(newData, callback)
 
 /* account lookup methods */
 
-exports.deleteNews = function(id, callback)
+exports.deleteNewsletter = function(id, callback)
 {
 	news.remove({_id: getObjectId(id)}, callback);
 }

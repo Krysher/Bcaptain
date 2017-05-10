@@ -1,7 +1,7 @@
 extends layout
 block content
 	include modals/alert
-	include modals/confirm2
+	include modals/confirm3
 	include modals/addNews
 	include modals/updateNews
 	include leftnavbar
@@ -71,26 +71,27 @@ block content
 				#managetable.table-responsive
 					table#mytable.table.table-bordred.table-striped
 						thead
-							th Events Name
-							th Events Type
-							th Events Date
-							th Events Duration
-							th Created By
-							th Edit
-							th Delete
+							th Name
+							th Recipients
+							th News Item
+							th Created
+							th Actions
 						tbody
+							br
+							input#search.form-control(type='text', name='search', placeholder='Type here to search')
+							span.glyphicon.glyphicon-search.form-control-feedback
 						- for (var i = 0; i < letterData.length; i++)
 							tr(name="#{letterData[i].event_type}")
-								td= letterData[i].event_name
-								td= letterData[i].event_type
-								td= letterData[i].event_date
-								td= letterData[i].event_duration + ' Hours'
-								td= letterData[i].creator
+								td= letterData[i].newsletter_name
+								td= letterData[i].newsletter_receipt.length
+								td= letterData[i].newletter_events_id.length
+								td= letterData[i].date
 								td
-									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateNews('#{letterData[i].event_name}', '#{letterData[i].event_type}',  '#{letterData[i].event_duration}', '#{letterData[i].event_date}', '#{letterData[i]._id}')")
-										span.glyphicon.glyphicon-pencil
-								td
-									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveNews('#{letterData[i]._id}')")
+									button.btn.btn-primary.btn-xs(type='button', style="background-color: blue", id='account1-form-btn1', onclick="hcc.sendMail(#{letterData[i]._id})")
+										span.glyphicon.glyphicon-envelope.blue
+									button.btn.btn-primary.btn-xs(type='button', style="background-color: green", id='account1-form-btn1', onclick="hcc.printMail(#{letterData[i]._id})")
+										span.glyphicon.glyphicon-print
+									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveNewsletter('#{letterData[i]._id}')")
 										span.glyphicon.glyphicon-trash
 				#wizard
 					h1 Start
@@ -164,10 +165,10 @@ block scripts
 	
 	
 	script.
+		var hcc = new HomeController();
 		theName = "#{user.firstname}" + " " + "#{user.lastname}";
 		theAddress = "#{user.address}";
 		$(document).ready(function(){
-		var hcc = new HomeController();
 		function toggle(source) {
 		checkboxes = document.getElementsByName('check');
 		for(var i=0, n=checkboxes.length;i<n;i++) {

@@ -55,6 +55,7 @@ block content
 				br
 				button.btn.btn-primary(type='button', onclick="$('.addResident').modal('show')") Add a Resident
 				#managetable.table-responsive
+					br
 					table#mytable.table.table-bordred.table-striped
 						thead
 							th First Name
@@ -65,6 +66,9 @@ block content
 							th Edit
 							th Delete
 						tbody
+							br
+							input#search.form-control(type='text', name='search', placeholder='Type here to search')
+							span.glyphicon.glyphicon-search.form-control-feedback
 						- for (var i = 0; i < accts.length; i++)
 							tr
 								td= accts[i].firstname

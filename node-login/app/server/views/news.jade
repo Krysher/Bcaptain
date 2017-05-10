@@ -65,6 +65,9 @@ block content
 							th Edit
 							th Delete
 						tbody
+							br
+							input#search.form-control(type='text', name='search', placeholder='Type here to search')
+							span.glyphicon.glyphicon-search.form-control-feedback
 						- for (var i = 0; i < accts.length; i++)
 							tr(name="#{accts[i].event_type}")
 								td= accts[i].event_name

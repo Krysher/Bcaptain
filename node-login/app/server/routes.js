@@ -282,10 +282,12 @@ module.exports = function(app) {
 		});
 	});
 
-		app.post('/addNewsletter', function(req, res){
-		NM.addNews({
+	app.post('/addNewsletter', function(req, res){
+		console.log(req.body);
+		NL.addNewsletter({
 			newsletter_name 	   : req.body.nn,
 			newsletter_receipt 	   : req.body.nr,
+			newletter_events_id	   : req.body.ei,
 			newsletter_body		   : req.body.nb,
 		}, function(e){
 			if (e){
@@ -313,8 +315,6 @@ module.exports = function(app) {
 			}
 		});
 	});
-
-
 
 	app.post('/updateResident', function(req, res){
 		RM.updateAccount({
@@ -345,6 +345,16 @@ module.exports = function(app) {
 
 		app.post('/delNews', function(req, res){
 		NM.deleteNews(req.body.id, function(e, obj){
+			if (!e){
+				res.status(200).send('ok');
+			}	else{
+				res.status(400).send('record not found');
+			}
+	    });
+	});
+
+		app.post('/delNewsletter', function(req, res){
+		NL.deleteNewsletter(req.body.id, function(e, obj){
 			if (!e){
 				res.status(200).send('ok');
 			}	else{
