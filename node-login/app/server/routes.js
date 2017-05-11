@@ -8,16 +8,16 @@ var reachmail = require('./modules/reachmailapi.js');
 
 
 var sendOutEmail = function(newsletter) {
+	/*
 	var reachmailTemplate = "";
 	//console.log(newsletter);
 	for (i = 0; i < newsletter.newsletter_receipt.length; i++) {
 		var temporary = newsletter.newsletter_receipt[i];
 		reachmailTemplate += "{ Address: '" + temporary + "'}"
-		var emailx = "hoangbui1337@gmail.com"
 	}
-	var escapedBody = newsletter.newsletter_body.replace(/"/g, '\\"');
-	console.log(reachmailTemplate)
-	console.log("AAAAAAAAAAAAAAAA")
+*/
+	var unescaped_body = unescape(encodeURIComponent(newsletter.newsletter_body));
+	//var escapedBody = newsletter.newsletter_body.replace(/"/g, '\\"');
 
 
 	var api = new reachmail({token: 'TIeQWYMm5aRz8JUZ_pFjUkgSh2cfst5uetYbagzc0XkUqNs7dUk2JBackABPcuw2'});
@@ -25,21 +25,23 @@ var sendOutEmail = function(newsletter) {
 //The following builds the content of the message
 	var body={
 		FromAddress: 'admin@blockcapta.in',
-		Recipients: [ reachmailTemplate
-		],
+		Recipients: [],
 	  	Headers: { 
 			Subject: 'BlockCaptain Network Newsletter' , 
 			From: 'BlockCaptain Network <admin@blockcapta.in>', 
 			'X-Company': 'BlockCaptain Network', 
 			'X-Location': 'Philadelphia' 
 		}, 
-		BodyHtml: "", 
+		BodyHtml: unescaped_body, 
 		Tracking: true
 	};
 	//JSON encode the message body for transmission
 	jsonBody = JSON.stringify(body);
-	console.log(jsonBody);
-
+	var data = JSON.parse(jsonBody);
+	var newAddresses = newsletter.newsletter_receipt.map(function(r) { return {Address: r};});
+	data.Recipients = data.Recipients.concat(newAddresses);
+	var yourNewJson = JSON.stringify(data);
+	console.log(yourNewJson);
 	/* 
 	The function below retreieves the account GUID. Only when succefful will the 
 	function proceed to them schedule the message for delivery.
@@ -50,7 +52,7 @@ var sendOutEmail = function(newsletter) {
 			AccountId=response.AccountId; //extracts account GUID from response obj
 			console.log("Success!  Account GUID: " + AccountId); //prints out the Account GUID
 			//Next Function sends the message
-			api.easySmtpDelivery(AccountId, jsonBody, function (http_code, response) {
+			api.easySmtpDelivery(AccountId, yourNewJson, function (http_code, response) {
 				if (http_code===200) {
 					console.log("successful connection to EasySMTP API");
 					console.log(response);

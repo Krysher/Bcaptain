@@ -417,7 +417,6 @@ function get_selected(ele) {
  		var local_template = `
  		<div ID="${myEvent[i]['event_type']}">
           ${myEvent[i]['event_type']}
-            <!--Event Template - use this section as the template for each entry w/correct clases. Should be easy w/ DOM.-->
             <div class="eventTitle">
               ${myEvent[i]['event_name']} - ${myEvent[i]['event_date']} for ${myEvent[i]['event_duration']}
             </div>
@@ -429,8 +428,7 @@ function get_selected(ele) {
         `
         event_template += local_template;
  	}
- 	var data = `
-  <style>
+ 	var data = `<style>
 	body {
 	  background: rgb(204,204,204); 
 	}
@@ -441,7 +439,6 @@ function get_selected(ele) {
 	  margin: 0 auto;
 	  margin-bottom: 0.5cm;
 	  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-	  /*padding:20px;*/
 	}
 	page[size="letter"] {  
 	  width: 8.5in;
@@ -546,24 +543,19 @@ function get_selected(ele) {
 	}
   </style>
   	<page size="letter">
-
-      <!--Main header-->
       <div ID="mainHeaderLogo">
     		<img src="/images/logoHiRes.png" />
       </div>
     	<div ID="mainHeaderBCInfo">
-      	${theAddress}<br>${theName} – Block Captain<br>${now_date}
+      	${theAddress}<br>${theName} - Block Captain<br>${now_date}
   	  </div>
-
-      <!--Body-->
       <div ID="newsletterTitle">
       	${title}
       </div>
       ${event_template}
-  	</page>
-`
+  	</page>`
  	$("#wizard-p-3").html(data)
- 	global_review = data;
+ 	global_review = data.replace(/(\r\n\t|\n|\r|\t|)/gm,"")
  }
 
  $("#search").keyup(function() {
