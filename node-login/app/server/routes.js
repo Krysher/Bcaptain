@@ -20,7 +20,7 @@ var sendOutEmail = function(newsletter) {
 	//var escapedBody = newsletter.newsletter_body.replace(/"/g, '\\"');
 
 
-	var api = new reachmail({token: 'TIeQWYMm5aRz8JUZ_pFjUkgSh2cfst5uetYbagzc0XkUqNs7dUk2JBackABPcuw2'});
+	var api = new reachmail({token: 'zDRwIU2hHB0dFved6-c2MO-Me2x5U-VZkMxPcFIp0Vt2UC69sD0iT2KdxATj5DA2'});
 
 //The following builds the content of the message
 	var body={
