@@ -414,146 +414,33 @@ function get_selected(ele) {
  	var myEvent = get_selected()["event"];
  	var myEvent_length = myEvent.length;
  	for (var i = 0; i < myEvent_length; i++) {
- 		var local_template = `
- 		<div ID="${myEvent[i]['event_type']}">
-          ${myEvent[i]['event_type']}
-            <div class="eventTitle">
-              ${myEvent[i]['event_name']} - ${myEvent[i]['event_date']} for ${myEvent[i]['event_duration']}
+ 		var local_template = `<div ID="${myEvent[i]["event_type"]}" style="display: block; clear:both; font-size: 18pt; text-align: left; vertical-align: top; margin-top: 5px; margin-bottom: 5px; margin-left: 25px; margin-right: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background-clip:padding-box; border-radius: 10px; background-color:#CBF3DC;">${myEvent[i]["event_type"]}
+            <div class="eventTitle" style="display: block; clear:both; font-size: 16pt; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; padding-left: 30px;">
+              ${myEvent[i]["event_name"]} - ${myEvent[i]["event_date"]} for ${myEvent[i]["event_duration"]}
             </div>
-            <div class="${myEvent[i]['event_type']}Desc">
-              ${myEvent[i]['event_dec']}
+            <div class="${myEvent[i]["event_type"]}Desc" style="display: block; clear:both; font-size: 14pt; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; padding-left: 45px;"> \
+              ${myEvent[i]["event_dec"]}
             </div>
         </div>
-        <br>
-        `
+        <br>`
         event_template += local_template;
  	}
- 	var data = `<style>
-	body {
-	  background: rgb(204,204,204); 
-	}
-
-	page {
-	  background: white;
-	  display: block;
-	  margin: 0 auto;
-	  margin-bottom: 0.5cm;
-	  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-	}
-	page[size="letter"] {  
-	  width: 8.5in;
-	  height: 11in; 
-	}
-	@media print {
-	  body, page {
-		margin: 0;
-		box-shadow: 0;
-	  }
-	}
-
-	img {
-		max-width: 100%;
-		max-height: 100%;
-	}
-
-	#mainHeaderLogo {
-	  display: flex;
-	  width: 46%;
-	  height: 13%;
-	  float: left;
-	  padding-top: 25px;
-	  padding-left: 25px;
-	}
-
-	#mainHeaderBCInfo {
-	  display: flex;
-	  width: 46%;
-	  height: 13%;
-	  max-width: 100%;
-	  max-height: 100%;
-	  float:right;
-	  font-size: 16pt;
-	  text-align: center;
-	  justify-content:center;
-	  align-items:center;
-	  padding-top: 25px;
-	  padding-right: 25px;
-	}
-
-	#newsletterTitle {
-	  display: block;
-	  clear:both;
-	  font-size: 20pt;
-	  text-align: center;
-	  vertical-align: top;
-	  padding-top: 15px;
-	  padding-bottom: 15px;
-	}
-
-	#Event, #Notice, #Information {
-	  display: block;
-	  clear:both;
-	  font-size: 18pt;
-	  text-align: left;
-	  vertical-align: top;
-	  margin-top: 5px;
-	  margin-bottom: 5px;
-	  margin-left: 25px;
-	  margin-right: 25px;
-	  padding-top: 5px;
-	  padding-bottom: 5px;
-	  padding-left: 5px;
-	  padding-right: 5px;
-	  background-clip:padding-box;
-	  border-radius: 10px;
-	}
-
-	#Event {
-	  background-color:#CBF3DC;
-	}
-
-	#Notice {
-	  background-color:#FCE7C4;
-	}
-
-	#Information {
-	  background-color:#CDE6F6;
-	}
-
-	.EventTitle, .NoticeTitle, .InfoTitle {
-	  display: block;
-	  clear:both;
-	  font-size: 16pt;
-	  text-align: left;
-	  vertical-align: top;
-	  padding-top: 5px;
-	  padding-bottom: 5px;
-	  padding-left: 30px;
-	}
-
-	.EventDesc, .NoticeDesc, .InformationDesc {
-	  display: block;
-	  clear:both;
-	  font-size: 14pt;
-	  text-align: left;
-	  vertical-align: top;
-	  padding-top: 5px;
-	  padding-bottom: 5px;
-	  padding-left: 45px;
-	}
-  </style>
-  	<page size="letter">
-      <div ID="mainHeaderLogo">
-    		<img src="/images/logoHiRes.png" />
-      </div>
-    	<div ID="mainHeaderBCInfo">
-      	${theAddress}<br>${theName} - Block Captain<br>${now_date}
-  	  </div>
-      <div ID="newsletterTitle">
-      	${title}
-      </div>
-      ${event_template}
-  	</page>`
+ 	var data = `<body style="overflow-y: scroll; object-fit: contain;">
+				  <page style="background: white; display: block; margin: 0 auto; margin-bottom: 0.5cm; box-shadow: 0 0 0.5cm rgba(0,0,0,0.5); width: 8.5in; height: 11in;">
+				    <div ID="mainHeader" style="display: flex; align-items:center; width: 100%; height: 15%; padding-top: 25px; padding-left: 25px; padding-right: 25px;">
+				      <img src="https://blockcapta.in/images/logoHiRes.png" style="width: 46%; height:100%; object-fit: contain;" />
+				      <div ID="mainHeaderBCInfo" style="flex-grow:1; font-size:16pt; text-align:center; text-justify:center;">
+				        ${theAddress}
+				        <br>${theName} - Block Captain
+				        <br>${now_date}
+				      </div>
+				    </div>
+				    <div ID="newsletterTitle" style="display: block; clear:both; font-size: 20pt; text-align: center; vertical-align: top; padding-top: 15px; padding-bottom: 15px;">
+				      ${title}
+				    </div>
+				    ${event_template}
+				  </page>
+				</body>`
  	$("#wizard-p-3").html(data)
  	global_review = data.replace(/(\r\n\t|\n|\r|\t|)/gm,"")
  }
