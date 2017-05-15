@@ -126,3 +126,7 @@ a.indent {
   background-color: #05014a;
   border-color: #05014a;
 }
+
+.navbar-fixed-left > .navbar-nav > li > a:hover {
+    color: #fff700;
+}

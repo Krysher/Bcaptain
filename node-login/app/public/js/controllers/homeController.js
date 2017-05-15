@@ -290,10 +290,11 @@ function HomeController()
 			type: "POST",
 			data: {ni: newsletter_id},
 			success: function(data){
-	 			that.showLockedAlert('Email SENT.');
+	 			dontUse.showLockedAlertNL('Email sent.');
 			},
 			error: function(jqXHR){
-				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+				dontUse.showLockedAlertNL('There has been an error.');
+				//console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 			}
 		});
 		//maybe pop up an alert saying it is sent!
