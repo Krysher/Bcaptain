@@ -116,3 +116,13 @@ a.indent {
 .control-label {
   padding-top: 2%;
 }
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #0B3C5D;
+}
+.navbar-nav>li>a {
+  color: #f5d003;
+  background-color: #05014a;
+  border-color: #05014a;
+}

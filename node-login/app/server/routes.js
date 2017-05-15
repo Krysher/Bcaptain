@@ -259,7 +259,11 @@ module.exports = function(app) {
 	});
 	
 	app.get('/about', function(req, res) {
-		res.render('about', {  title: 'About the team'});
+		res.render('about', {  title: 'About BlockCaptain Network'});
+	});
+
+	app.get('/contact', function(req, res) {
+		res.render('Contact', {  title: 'Contact Us'});
 	});
 
 	app.get('/manage', function(req, res) {

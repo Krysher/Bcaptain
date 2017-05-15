@@ -5,17 +5,17 @@
 				button.close(data-dismiss='modal') x
 				h4 Update Event
 			.modal-body
-				form.well
+				form#set-form-valid.well
 					h6 Please tell us a little about this Event.
 					.form-group
 						label.control-label.col-sm-3 Event Name
 						.col-sm-9
-							input.form-control#event_name(type='text', name='event_name', value="").form-control
+							input.form-control#event_name(type='text', name='event_name', value="", data-rule-required="true").form-control
 							input.form-control#name-tf(type='hidden', name='event_id', value="")
 					.form-group
 						label.control-label.col-sm-3 Event End Time
 						.col-sm-9
-							input.form-control#event_length(type='number', step='.1', name='event_duration', value="").form-control
+							input.form-control#event_length(type='number', step='.1', name='event_duration', value="", data-rule-required="true").form-control
 					.form-group
 						label.control-label.col-sm-3 Event Type
 						.col-sm-9
@@ -26,11 +26,22 @@
 					.form-group
 						label.control-label.col-sm-3 Start Date and Time
 						.col-sm-9
-							input#datetimepickers(type='text', name='event_date').form-control
+							input#datetimepickers(type='text', name='event_date', data-rule-required="true").form-control
 					.form-group
 						label.control-label.col-sm-3 Description
 						.col-sm-9
-							textarea#eventDescription.form-control(rows='5')
+							textarea#eventDescription.form-control(rows='5', data-rule-required="true")
 					.form-group
-						button(type='button' onclick="$('.updateNews').modal('hide');")#updateResident-form-btn1.btn.btn-default
-						button(type='button' onclick="hcc.UpdateNews();")#updateResident-form-btn2.btn.btn-primary
+						button(type='button', onclick="$('.updateNews').modal('hide');")#updateResident-form-btn1.btn.btn-default
+						button(type='submit')#updateResident-form-btn2.btn.btn-primary
+block scripts
+	script.
+		$(document).ready(function(){
+		var form = $("#set-form-valid");
+		form.validate({
+			submitHandler: function(form) {
+			hcc.UpdateNews();
+			form.submit();
+			}
+		});
+		})

@@ -1,65 +1,31 @@
 extends layout
-
 link(rel='stylesheet', href='/css/round-about.css')
 block content
 	include navbar
-		include modals/alert
-		include modals/confirm
+	body
+	style.
+		.info-panel-down {
+		padding-top: 10%;
+		width: 70%;
+		margin:0 auto;
+		}
 	.container
-		.row
-			.col-lg-12
-				h1.page-header
-					| About Us
-					br
-					small It's Nice to Meet You!
-				p
-					| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?
-		.row
-			.col-lg-12
-				h2.page-header Our Team
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-			.col-lg-4.col-sm-6.text-center
-				img.img-circle.img-responsive.img-center(src='http://placehold.it/200x200', alt='')
-				h3
-					| John Smith
-					small Job Title
-				p
-					| What does this team member to? Keep it short! This is also a great spot for social links!
-    
+		.info-panel-down
+			.panel.panel-info
+				.panel-heading
+					h4 About Block Captin
+				.panel-body
+					.container.inner-container
+						| Througout the city of Philadelphia, neighborhoods are organized around a network of block captins (1-2 per city block). There are also often several community
+						| organizations serving sections of the neighborhood. Block captins are residents who has taken on the role of information dissemination of their block. They organize
+						| clean up activities, share information about events in the area, and hold meetings along with other services. Neiborhood groups sometimes use them to get information
+						| to residents.
+						br
+						br
+						| The Point Breeze area of Philadelphia is the home of approximately 84,000 residents. Within this area, there are between 250 to 300 individual blocks,
+						|       each having 1 or 2 block captin. Overall coordination is currently disjointed and managed by several folks who are using pen and paper to track which captin
+						|       belong to each block. The information is currently difficult to maintain and getting information to the captins is not efficient or effective.
+
 
 
 block scripts

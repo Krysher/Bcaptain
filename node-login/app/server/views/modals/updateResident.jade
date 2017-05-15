@@ -5,28 +5,38 @@
 				button.close(data-dismiss='modal') x
 				h4 Update Resident
 			.modal-body
-				form#set-password-form.well
+				form#set-form-valid.well.well
 					h6 Please tell us a little about this Resident.
 					.form-group
 						label.control-label.col-sm-3 First Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Ufirstname', value="")
+							input.form-control#name-tf(type='text', name='Ufirstname', value="", data-rule-required="true")
 					.form-group
 						label.control-label.col-sm-3 Last Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Ulastname', value="")
+							input.form-control#name-tf(type='text', name='Ulastname', value="", data-rule-required="true")
 
 					.form-group
 						label.control-label.col-sm-3 Email
 						.col-sm-9
-							input.form-control#email-tf(type='text', name='Uemail', value="")
+							input.form-control#email-tf(type='email', name='Uemail', value="", data-rule-required="true")
 
 					.form-group
 						label.control-label.col-sm-3 Address
 						.col-sm-9
-							input.form-control#address-tf(type='text', name='Uaddress', value="")
+							input.form-control#address-tf(type='text', name='Uaddress', value="", data-rule-required="true")
 							input(type='hidden', name="UuserID", value="")
-					.clearfix
-						.form-buttons
-							button(type='button' onclick="$('.updateResident').modal('hide');")#updateResident-form-btn1.btn.btn-default
-							button(type='button' onclick="hcc.UpdateResident();")#updateResident-form-btn2.btn.btn-primary
+					.form-group
+						button(type='button', onclick="$('.updateResident').modal('hide');")#updateResident-form-btn1.btn.btn-default
+						button(type='submit')#updateResident-form-btn2.btn.btn-primary
+block scripts
+	script.
+		$(document).ready(function(){
+		var form = $("#set-form-valid.well");
+		form.validate({
+			submitHandler: function(form) {
+			hcc.UpdateResident();
+			form.submit();
+			}
+		});
+		})

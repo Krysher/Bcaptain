@@ -12,23 +12,33 @@
 					.form-group
 						label.control-label.col-sm-3 First Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Rfirstname').required
+							input.form-control#name-tf(type='text', name='Rfirstname', data-rule-required="true")
 							input(type='hidden', name='RcreatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 Last Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='Rlastname').required
-
+							input.form-control#name-tf(type='text', name='Rlastname', data-rule-required="true")
 					.form-group
 						label.control-label.col-sm-3 Email
 						.col-sm-9
-							input.form-control#email-tf(type='text', name='Remail').required
-
+							input.form-control#email-tf(type='email', name='Remail', data-rule-required="true")
 					.form-group
 						label.control-label.col-sm-3 Address
 						.col-sm-9
-							input.form-control#address-tf(type='text', name='Raddress').required
+							input.form-control#address-tf(type='text', name='Raddress', data-rule-required="true")
 					.clearfix
 						.form-buttons
 							button(type='button', onclick="$('.addResident').modal('hide');")#addresident-form-btn1.btn.btn-default
-							button(type='button' onclick="hcc.AddResident(); ")#addresident-form-btn2.btn.btn-primary
+							button(type='submit')#addresident-form-btn2.btn.btn-primary
+
+block scripts
+	script.
+		$(document).ready(function(){
+		var form = $("#set-password-form");
+		form.validate({
+			submitHandler: function(form) {
+			hcc.AddResident();
+			form.submit();
+			}
+		});
+		})

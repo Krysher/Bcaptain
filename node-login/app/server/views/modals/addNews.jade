@@ -12,13 +12,13 @@
 					.form-group
 						label.control-label.col-sm-3 Event Name
 						.col-sm-9
-							input.form-control#name-tf(type='text', name='event_name').required
+							input.form-control#name-tf(type='text', name='event_name', data-rule-required="true")
 							input(type='hidden', name='creator', value= user.firstname)
 							input(type='hidden', name='creatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 Duration (Hour)
 						.col-sm-9
-							input.form-control#event_length(type='number', step='0.1', name='event_duration', value="0.5").form-control
+							input.form-control#event_length(type='number', step='0.1', name='event_duration', value="0.5", data-rule-required="true").form-control
 					.form-group
 						label.control-label.col-sm-3 Event Type
 						.col-sm-9
@@ -29,12 +29,23 @@
 					.form-group
 						label.control-label.col-sm-3 Event Date
 						.col-sm-9
-							input#datetimepicker(type='text', name='event_date').form-control
+							input#datetimepicker(type='text', name='event_date', data-rule-required="true").form-control
 					.form-group
 						label.control-label.col-sm-3 Description
 						.col-sm-9
-							textarea#eventDescription.form-control(rows='5')
+							textarea#eventDescription.form-control(rows='5', data-rule-required="true")
 					.form-group
 						.form-button
 							button(type='button', onclick="$('.addNews').modal('hide');")#addresident-form-btn1.btn.btn-default
-							button(type='button' onclick="hcc.addNews(); ")#addresident-form-btn2.btn.btn-primary
+							button(type='submit')#addresident-form-btn2.btn.btn-primary
+block scripts
+	script.
+		$(document).ready(function(){
+		var form = $("#set-password-form");
+		form.validate({
+			submitHandler: function(form) {
+			hcc.addNews()
+			form.submit();
+			}
+		});
+		})

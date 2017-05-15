@@ -4,9 +4,9 @@ module.exports = EM;
 
 EM.server = require("emailjs/email").server.connect(
 {
-	host 	    : process.env.EMAIL_HOST || 'smtp.gmail.com',
-	user 	    : process.env.EMAIL_USER || 'dasneko13@gmail.com',
-	password    : process.env.EMAIL_PASS || 'concac12',
+	host 	    : process.env.EMAIL_HOST || 'Ssrs.reachmail.net',
+	user 	    : process.env.EMAIL_USER || 'BLOCKCAP2\\smtp',
+	password    : process.env.EMAIL_PASS || '_CorianderRhubarbAniseParsley!',
 	ssl		    : true
 });
 
@@ -24,7 +24,7 @@ EM.dispatchResetPasswordLink = function(account, callback)
 EM.composeEmail = function(o)
 //make into https pls
 {
-	var link = 'http://173.49.169.4/reset-password?e='+o.email+'&p='+o.pass;
+	var link = 'http://blockcapta.in/reset-password?e='+o.email+'&p='+o.pass;
 	var html = "<html><body>";
 		html += "Hi "+o.name+",<br><br>";
 		html += "Your username is <b>"+o.user+"</b><br><br>";

@@ -88,7 +88,7 @@ h6 {
 }
 #account-form-container form {
   width: 460px;
-  margin-top: 4%;
+  margin-top: 8%;
 }
 /*
 	modal windows
@@ -136,4 +136,17 @@ h6 {
 .form-horizontal input,
 .form-horizontal select {
   height: 30px;
+}
+
+.well > .form-group > .btn{
+  margin-top: 3%;
+}
+
+.well > .form-buttons {
+  padding-top: 5%;
+  margin-top: 8%;
+}
+
+.error {
+  color: red;
 }

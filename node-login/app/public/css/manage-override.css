@@ -94,3 +94,12 @@ tr[name=Event] {
 	background-color: #d9edf7 !important;
 	
 }
+
+.well > .form-group > .btn{
+  margin-top: 3%;
+}
+
+.well > .clearfix > .form-buttons {
+  padding-top: 5%;
+  margin-top: 8%;
+}
