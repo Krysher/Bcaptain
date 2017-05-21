@@ -9,11 +9,11 @@
 			.modal-body
 				form#set-password-form.well
 					h6 Please tell us a little about this Resident.
+					input(type='hidden', name='RcreatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 First Name
 						.col-sm-9
 							input.form-control#name-tf(type='text', name='Rfirstname', data-rule-required="true")
-							input(type='hidden', name='RcreatorID', value= user._id)
 					.form-group
 						label.control-label.col-sm-3 Last Name
 						.col-sm-9

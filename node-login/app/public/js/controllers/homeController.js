@@ -43,22 +43,6 @@ function HomeController()
 	}
 
 
-/*
-	this.getCalendnar = function(userId) {
-		$.ajax({
-			url: '/getCalendar',
-			type: 'POST',
-			data: { id: $('#userId').val()},  //this is practically a god damn backdoor (big vulnerability)
-			success: function(data){
-				return newsData;
-			},
-			error: function(jqXHR){
-				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
-			}
-		});
-	}
-*/
-
 	this.AddResident = function()
 	{
 		var Rfirstname = $('input[name=Rfirstname]').val();
@@ -280,7 +264,7 @@ function HomeController()
 //for NEWSLETTER
 	this.printMail = function(newsletter_id) {
 		var construct_query = "/printnewsletters?q=" + newsletter_id;
-		window.location.replace(construct_query);
+		window.open(construct_query, '_blank');
 	}
 
 	this.sendMail = function(newsletter_id) {
@@ -294,7 +278,7 @@ function HomeController()
 			},
 			error: function(jqXHR){
 				dontUse.showLockedAlertNL('There has been an error.');
-				//console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 			}
 		});
 		//maybe pop up an alert saying it is sent!
@@ -385,6 +369,7 @@ function get_everything() {
  			dontUse.showLockedAlertNL('This Newsletter has been added.');
 		},
 		error: function(jqXHR){
+
 			console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 		}
 	});

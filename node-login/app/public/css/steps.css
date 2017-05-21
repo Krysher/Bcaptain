@@ -166,6 +166,7 @@
 
 .wizard > .content > .body
 {
+    overflow-y: scroll;
     float: left;
     position: absolute;
     width: 95%;

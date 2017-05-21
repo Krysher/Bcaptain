@@ -87,8 +87,11 @@ h6 {
   margin-right: 5px;
 }
 #account-form-container form {
+  position: absolute;
   width: 460px;
-  margin-top: 8%;
+  left: 50%;
+  transform:translate(-50%, 10%);
+
 }
 /*
 	modal windows

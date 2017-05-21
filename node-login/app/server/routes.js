@@ -7,7 +7,7 @@ var reachmail = require('./modules/reachmailapi.js');
 
 
 
-var sendOutEmail = function(newsletter) {
+function sendOutEmail(newsletter, callback) {
 	/*
 	var reachmailTemplate = "";
 	//console.log(newsletter);
@@ -56,14 +56,18 @@ var sendOutEmail = function(newsletter) {
 				if (http_code===200) {
 					console.log("successful connection to EasySMTP API");
 					console.log(response);
+					callback(http_code);
 				}else { 
 					console.log("Oops, looks like an error on send. Status Code: " + http_code);
-					console.log("Details: " + response);
+					callback(http_code);
+					//return http_code;
 				}
 			});
 		} else {
 			console.log("Oops, there was an error when trying to get the account GUID. Status Code: " + http_code);
 			console.log("Details: " + response);
+			callback(http_code);
+			//return http_code;
 		}
 	});
 }
@@ -75,6 +79,7 @@ var sendOutEmail = function(newsletter) {
 module.exports = function(app) {
 
 // main login page //
+
 	app.get('/', function(req, res){
 	// check if the user's credentials are saved in a cookie //
 		if (req.cookies.user == undefined || req.cookies.pass == undefined){
@@ -388,6 +393,7 @@ module.exports = function(app) {
 			newsletter_receipt 	   : req.body.nr,
 			newletter_events_id	   : req.body.ei,
 			newsletter_body		   : req.body.nb,
+			creatorID              : req.session.user._id,
 		}, function(e){
 			if (e){
 				res.status(400).send(e);
@@ -402,9 +408,12 @@ module.exports = function(app) {
 			res.redirect('/');
 		}
 		else {
+			function sendRes(data) {
+				res.status(data).send('ok');
+			}
 			//console.log(req.body.ni);
 			NL.printWithId( req.body.ni, function(e, news){
-				sendOutEmail(news);
+				sendOutEmail(news, sendRes);
 			})
 		}
 	});

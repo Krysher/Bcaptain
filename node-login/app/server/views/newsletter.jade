@@ -77,12 +77,11 @@ block content
 						tbody
 							br
 							input#search.form-control(type='text', name='search', placeholder='Type here to search')
-							span.glyphicon.glyphicon-search.form-control-feedback
 						- for (var i = 0; i < letterData.length; i++)
 							tr(name="#{letterData[i].event_type}")
 								td= letterData[i].newsletter_name
-								td= letterData[i].newsletter_receipt.length
-								td= letterData[i].newletter_events_id.length
+								td= letterData[i].newsletter_receipt
+								td= letterData[i].newletter_events_id
 								td= letterData[i].date
 								td
 									button.btn.btn-primary.btn-xs(type='button', style="background-color: blue", id='account1-form-btn1', onclick="hcc.sendMail('#{letterData[i]._id}')")
@@ -103,7 +102,7 @@ block content
 
 					h1 Choose News
 					div
-						table#mytable.table.table-bordred.table-striped
+						table#mytable1.table.table-bordred.table-striped
 							thead
 								th Select
 								th Events Name
@@ -125,7 +124,7 @@ block content
 									td(style='display: none')= newsData[i].event_dec
 					h1 Choose Resident
 					div
-						table#mytable.table.table-bordred.table-striped
+						table#mytable2.table.table-bordred.table-striped
 							thead
 								th Select
 								th First Name
@@ -156,9 +155,10 @@ block scripts
 	script(src='/js/views/home.js')
 	script(src='/js/views/jquery.steps.min.js')
 	script(src='/js/views/multiform.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.10/js/jquery.tablesorter.min.js')
 	script(src='/js/controllers/homeController.js')
 	script(src='/js/form-validators/accountValidator.js')
-	script(src='//code.jquery.com/ui/1.12.1/jquery-ui.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
 	
 	
 	script.
@@ -172,4 +172,7 @@ block scripts
 		checkboxes[i].checked = source.checked;
 		}
 		};
+		$("#mytable").tablesorter(); 
+		$("#mytable1").tablesorter(); 
+		$("#mytable2").tablesorter(); 
 		});

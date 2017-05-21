@@ -41,7 +41,6 @@ block content
 						tbody
 							br
 							input#search.form-control(type='text', name='search', placeholder='Type here to search')
-							span.glyphicon.glyphicon-search.form-control-feedback
 						- for (var i = 0; i < accts.length; i++)
 							tr
 								td= accts[i].firstname
@@ -56,27 +55,17 @@ block content
 									button.btn.btn-danger.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showRemoveResident('#{accts[i]._id}')")
 										span.glyphicon.glyphicon-trash
 
-script.
-	$(document).ready(function(){
-	$("#mytable #checkall").click(function () {
-	if ($("#mytable #checkall").is(':checked')) {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", true);
-	});
-	} else {
-	$("#mytable input[type=checkbox]").each(function () {
-	$(this).prop("checked", false);
-	});
-	}
-	});
-	$("[data-toggle=tooltip]").tooltip();
-	});
-
 
 block scripts
+	script.
+		$(document).ready(function(){
+		$("#mytable").tablesorter(); 
+		$("[data-toggle=tooltip]").tooltip();
+		});
 	script(src='/vendor/jquery.form.min.js')
 	script(src='/vendor/bootstrap.min.js')
-	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js')
+	script(src='//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.10/js/jquery.tablesorter.min.js')
 	script(src='/js/views/home.js')
 	script(src='/js/controllers/homeController.js')
 	script(src='/js/form-validators/accountValidator.js')
