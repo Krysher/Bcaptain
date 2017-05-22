@@ -131,6 +131,7 @@ module.exports = function(app) {
 		if (req.session.user == null){
 			res.redirect('/');
 		}	else{
+			//console.log(req.body);
 			AM.updateAccount({
 				id			: req.session.user._id,
 				firstname 	: req.body['firstname'],

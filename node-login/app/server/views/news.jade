@@ -18,11 +18,13 @@ block content
 
 	- function secondsToHms(d) {
 	- d = Number(d);
-	- var h = Math.floor(d / 3600);
-	- var m = Math.floor(d % 3600 / 60);
+	- var day = Math.floor( d / 86400 )
+	- var h = Math.floor(d % 86400 / 3600);
+	- var m = Math.floor(d % 86400 % 3600 / 60);
+	- var dDisplay = day > 0 ? day + (day == 1 ? " day, " : " days, ") : "";
 	- var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
 	- var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes ") : "";
-	- return hDisplay + mDisplay;
+	- return dDisplay + hDisplay + mDisplay;
 	- }
 	.container
 		.row
@@ -42,10 +44,20 @@ block content
 					table#mytable.table.table-bordred.table-striped
 						thead
 							th Events Name
+								| 
+								span.glyphicon.glyphicon-sort
 							th Events Type
+								| 
+								span.glyphicon.glyphicon-sort
 							th Events Date
+								| 
+								span.glyphicon.glyphicon-sort
 							th Events Duration
+								| 
+								span.glyphicon.glyphicon-sort
 							th Created By
+								| 
+								span.glyphicon.glyphicon-sort
 							th Edit
 							th Delete
 						tbody

@@ -91,9 +91,10 @@ exports.addNewAccount = function(newData, callback)
 exports.updateAccount = function(newData, callback)
 {
 	accounts.findOne({_id:getObjectId(newData.id)}, function(e, o){
-		o.name 		= newData.name;
-		o.email 	= newData.email;
-		o.country 	= newData.country;
+		o.firstname 		= newData.firstname;
+		o.lastname			= newData.lastname;
+		o.email 			= newData.email;
+		o.address 			= newData.address;
 		if (newData.pass == ''){
 			accounts.save(o, {safe: true}, function(e) {
 				if (e) callback(e);

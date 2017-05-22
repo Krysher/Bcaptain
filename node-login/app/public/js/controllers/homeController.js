@@ -317,7 +317,7 @@ function HomeController()
 		$('.modal-alert .modal-body p').html(msg);
 		$('.modal-alert').modal('show');
 		$('.modal-alert button').click(function(){window.location.href = '/news';})
-		setTimeout(function(){window.location.href = '/news';}, 300000);
+		setTimeout(function(){window.location.href = '/news';}, 3000);
 	}
 	this.showLockedAlertNL = function(msg){
 		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
@@ -335,6 +335,7 @@ HomeController.prototype.onUpdateSuccess = function() {
 	$('.modal-alert .modal-body p').html('Your account has been updated.');
 	$('.modal-alert').modal('show');
 	$('.modal-alert button').off('click');
+	setTimeout(function(){window.location.href = '/home';}, 3000);
 }
 
 //things are getting complicated
