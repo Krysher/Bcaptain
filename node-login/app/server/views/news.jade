@@ -15,8 +15,15 @@ block content
 
 	// preset form values if we receive a userdata object //
 	- user = typeof(udata) != 'undefined' ? udata : { }
-	
 
+	- function secondsToHms(d) {
+	- d = Number(d);
+	- var h = Math.floor(d / 3600);
+	- var m = Math.floor(d % 3600 / 60);
+	- var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+	- var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes ") : "";
+	- return hDisplay + mDisplay;
+	- }
 	.container
 		.row
 			#title-header.col-md-12
@@ -49,7 +56,7 @@ block content
 								td= accts[i].event_name
 								td= accts[i].event_type
 								td= accts[i].event_date
-								td= accts[i].event_duration
+								td= secondsToHms(accts[i].event_duration)
 								td= accts[i].creator
 								td
 									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateNews('#{accts[i].event_name}', '#{accts[i].event_type}',  '#{accts[i].event_duration}', '#{accts[i].event_date}', '#{accts[i]._id}', '#{accts[i].event_dec}')")
@@ -78,3 +85,4 @@ block scripts
 		$("#mytable").tablesorter(); 
 		});
 		var hcc = new HomeController();
+

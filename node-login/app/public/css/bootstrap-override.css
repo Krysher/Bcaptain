@@ -86,6 +86,7 @@ body {
 
 
 .navbar-fixed-left {
+  z-index: 1;
   background-color: #05014a;
   padding-top: 4em;
   width: 10%;

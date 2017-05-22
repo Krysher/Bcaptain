@@ -7,6 +7,7 @@ var reachmail = require('./modules/reachmailapi.js');
 
 
 
+
 function sendOutEmail(newsletter, callback) {
 	/*
 	var reachmailTemplate = "";
@@ -41,7 +42,7 @@ function sendOutEmail(newsletter, callback) {
 	var newAddresses = newsletter.newsletter_receipt.map(function(r) { return {Address: r};});
 	data.Recipients = data.Recipients.concat(newAddresses);
 	var yourNewJson = JSON.stringify(data);
-	console.log(yourNewJson);
+	//console.log(yourNewJson);
 	/* 
 	The function below retreieves the account GUID. Only when succefful will the 
 	function proceed to them schedule the message for delivery.
@@ -268,7 +269,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/contact', function(req, res) {
-		res.render('Contact', {  title: 'Contact Us'});
+		res.render('contact', {  title: 'Contact Us'});
 	});
 
 	app.get('/manage', function(req, res) {

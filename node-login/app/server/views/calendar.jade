@@ -25,7 +25,10 @@ block scripts
 		$(document).ready(function() {
 		var calEnd = function (time, duration) {
 		var time_in_mili = new Date(time).getTime()
-		var end_in_mili = time_in_mili + duration
+		console.log(time + "     "  + time_in_mili);
+		console.log("AAAA" + duration);
+
+		var end_in_mili = time_in_mili + duration * 1000
 		var end = new Date(end_in_mili).toLocaleDateString() + " " + new Date(end_in_mili).toLocaleTimeString('en-GB')
 		return end;
 		}

@@ -151,7 +151,7 @@ function HomeController()
 		var creatorID      = $('input[name=creatorID]').val();
 		var event_dec	   = $('#eventDescription').val();
 		var that = this;
-		console.log(event_duration);
+		//console.log(event_duration);
 		$.ajax({
 			url: '/addNews',
 			type: 'POST',
@@ -169,7 +169,7 @@ function HomeController()
 
 
 	this.showUpdateNews = function(event_name, event_type, event_duration, event_date, event_id, event_dec) {
-		//console.log(event_name);
+		//console.log(event_duration);
 		$('.updateNews').on('show.bs.modal', function(event) {
 			$(".updateNews").find('input[name="event_name"]').val(event_name);
 			$(".updateNews").find('select[name="event_type"]').val(event_type);
@@ -317,7 +317,7 @@ function HomeController()
 		$('.modal-alert .modal-body p').html(msg);
 		$('.modal-alert').modal('show');
 		$('.modal-alert button').click(function(){window.location.href = '/news';})
-		setTimeout(function(){window.location.href = '/news';}, 3000);
+		setTimeout(function(){window.location.href = '/news';}, 300000);
 	}
 	this.showLockedAlertNL = function(msg){
 		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
