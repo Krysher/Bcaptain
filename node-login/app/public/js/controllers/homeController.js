@@ -394,7 +394,19 @@ function get_selected(ele) {
     return {event: event_selected, resident: resident_selected};
  }
 
- function generate_preview() {
+
+function secondsToHms(d) {
+	d = Number(d);
+	var day = Math.floor( d / 86400 )
+	var h = Math.floor(d % 86400 / 3600);
+	var m = Math.floor(d % 86400 % 3600 / 60);
+	var dDisplay = day > 0 ? day + (day == 1 ? " day, " : " days, ") : "";
+	var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes ") : "";
+	return dDisplay + hDisplay + mDisplay;
+}
+
+function generate_preview() {
  	var title = document.getElementById('InputNLName').value;
  	var event_template = "";
  	var now_date = moment().format("MM/DD/YYYY");

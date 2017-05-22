@@ -8,7 +8,16 @@ block content
 	link(rel='stylesheet', href='/css/jquery-ui-timepicker-addon.css')
 	link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
 
-	
+	- function secondsToHms(d) {
+	- d = Number(d);
+	- var day = Math.floor( d / 86400 )
+	- var h = Math.floor(d % 86400 / 3600);
+	- var m = Math.floor(d % 86400 % 3600 / 60);
+	- var dDisplay = day > 0 ? day + (day == 1 ? " day, " : " days, ") : "";
+	- var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+	- var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes ") : "";
+	- return dDisplay + hDisplay + mDisplay;
+	- }
 
 
 	// preset form values if we receive a userdata object //
@@ -115,10 +124,20 @@ block content
 							thead
 								th Select
 								th Events Name
+									| 
+									span.glyphicon.glyphicon-sort
 								th Events Type
+									| 
+									span.glyphicon.glyphicon-sort
 								th Events Date
+									| 
+									span.glyphicon.glyphicon-sort
 								th Events Duration
+									| 
+									span.glyphicon.glyphicon-sort
 								th Created By
+									| 
+									span.glyphicon.glyphicon-sort
 							tbody
 							- for (var i = 0; i < newsData.length; i++)
 								tr(name="#{newsData[i].event_type}", id='newsTable')
@@ -128,7 +147,7 @@ block content
 									td= newsData[i].event_name
 									td= newsData[i].event_type
 									td= newsData[i].event_date
-									td= newsData[i].event_duration + ' Hours'
+									td= secondsToHms(newsData[i].event_duration)
 									td= newsData[i].creator
 									td(style='display: none')= newsData[i].event_dec
 					h1 Choose Resident
@@ -136,11 +155,23 @@ block content
 						table#mytable2.table.table-bordred.table-striped
 							thead
 								th Select
+									| 
+									span.glyphicon.glyphicon-sort
 								th First Name
+									| 
+									span.glyphicon.glyphicon-sort
 								th Last Name
+									| 
+									span.glyphicon.glyphicon-sort
 								th Email
+									| 
+									span.glyphicon.glyphicon-sort
 								th Address
+									| 
+									span.glyphicon.glyphicon-sort
 								th Date Added
+									| 
+									span.glyphicon.glyphicon-sort
 							tbody
 							- for (var i = 0; i < acctData.length; i++)
 								tr
