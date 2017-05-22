@@ -25,8 +25,7 @@ block scripts
 		$(document).ready(function() {
 		var calEnd = function (time, duration) {
 		var time_in_mili = new Date(time).getTime()
-		var dur_in_mili = duration * 60 * 60 * 1000
-		var end_in_mili = time_in_mili + dur_in_mili
+		var end_in_mili = time_in_mili + duration
 		var end = new Date(end_in_mili).toLocaleDateString() + " " + new Date(end_in_mili).toLocaleTimeString('en-GB')
 		return end;
 		}

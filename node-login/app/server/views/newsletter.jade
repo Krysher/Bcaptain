@@ -7,6 +7,7 @@ block content
 	link(rel='stylesheet', href='/css/manage-override.css')
 	link(rel='stylesheet', href='/css/jquery-ui-timepicker-addon.css')
 	link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+
 	
 
 
@@ -81,7 +82,7 @@ block content
 							tr(name="#{letterData[i].event_type}")
 								td= letterData[i].newsletter_name
 								td= letterData[i].newsletter_receipt
-								td= letterData[i].newletter_events_id
+								td= letterData[i].newletter_events_id.length
 								td= letterData[i].date
 								td
 									button.btn.btn-primary.btn-xs(type='button', style="background-color: blue", id='account1-form-btn1', onclick="hcc.sendMail('#{letterData[i]._id}')")
@@ -166,12 +167,6 @@ block scripts
 		theName = "#{user.firstname}" + " " + "#{user.lastname}";
 		theAddress = "#{user.address}";
 		$(document).ready(function(){
-		function toggle(source) {
-		checkboxes = document.getElementsByName('check');
-		for(var i=0, n=checkboxes.length;i<n;i++) {
-		checkboxes[i].checked = source.checked;
-		}
-		};
 		$("#mytable").tablesorter(); 
 		$("#mytable1").tablesorter(); 
 		$("#mytable2").tablesorter(); 

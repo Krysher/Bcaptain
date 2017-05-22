@@ -9,6 +9,7 @@ block content
 	link(rel='stylesheet', href='/css/manage-override.css')
 	link(rel='stylesheet', href='/css/jquery-ui-timepicker-addon.css')
 	link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css')
+	link(rel='stylesheet', href='/css/bootstrap-duration-picker.css')
 	//link(rel='stylesheet', href='/css/tablesorter/style.css')
 
 
@@ -48,7 +49,7 @@ block content
 								td= accts[i].event_name
 								td= accts[i].event_type
 								td= accts[i].event_date
-								td= accts[i].event_duration + ' Hours'
+								td= accts[i].event_duration
 								td= accts[i].creator
 								td
 									button.btn.btn-primary.btn-xs(type='button', id='account1-form-btn1', onclick="hcc.showUpdateNews('#{accts[i].event_name}', '#{accts[i].event_type}',  '#{accts[i].event_duration}', '#{accts[i].event_date}', '#{accts[i]._id}', '#{accts[i].event_dec}')")
@@ -68,28 +69,12 @@ block scripts
 	script(src='//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js')
 	script(src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
 	script(src='/js/jquery-ui-timepicker-addon.js')
+	script(src='/js/bootstrap-duration-picker.js')
 	script.
 		$(document).ready(function(){
 		$('#datetimepicker').datetimepicker();
 		$('#datetimepickers').datetimepicker();
-		$("#mytable #checkall").click(function () {
-		if ($("#mytable #checkall").is(':checked')) {
-		$("#mytable input[type=checkbox]").each(function () {
-		$(this).prop("checked", true);
-		});
-		} else {
-		$("#mytable input[type=checkbox]").each(function () {
-		$(this).prop("checked", false);
-		});
-		}
-		});
 		$("[data-toggle=tooltip]").tooltip();
 		$("#mytable").tablesorter(); 
 		});
 		var hcc = new HomeController();
-		function toggle(source) {
-		checkboxes = document.getElementsByName('check');
-		for(var i=0, n=checkboxes.length;i<n;i++) {
-		checkboxes[i].checked = source.checked;
-		}
-		};

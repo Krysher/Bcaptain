@@ -277,7 +277,7 @@ function HomeController()
 	 			dontUse.showLockedAlertNL('Email sent.');
 			},
 			error: function(jqXHR){
-				dontUse.showLockedAlertNL('There has been an error.');
+				alert('There has been an error.');
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
 			}
 		});

@@ -64,8 +64,16 @@ block scripts
 		$(document).ready(function(){
 		var form = $("#account-form");
 		form.validate({
-			submitHandler: function(form) {
-			form.submit();
-			}
-		});
+		rules: {
+		pass: {
+		required: true,
+		minlength: 8
+		},
+		conf_pass: {
+		required: true,
+		minlength: 8,
+		equalTo: "#pass-tf"
+		},
+		}}
+		);
 		})

@@ -16,9 +16,9 @@
 							input(type='hidden', name='creator', value= user.firstname)
 							input(type='hidden', name='creatorID', value= user._id)
 					.form-group
-						label.control-label.col-sm-3 Duration (Hour)
+						label.control-label.col-sm-3 Duration
 						.col-sm-9
-							input.form-control#event_length(type='number', step='0.1', name='event_duration', value="0.5", data-rule-required="true").form-control
+							input#duration.form-control(type='text', value='3600', name="event_duration", data-rule-required="true")
 					.form-group
 						label.control-label.col-sm-3 Event Type
 						.col-sm-9
@@ -48,4 +48,11 @@ block scripts
 			form.submit();
 			}
 		});
-		})
+		$(function () {
+		$('#duration').durationPicker({
+		onChanged: function (newVal) {
+		$('#duration-label').text(newVal);
+		}
+		});
+		});
+		});

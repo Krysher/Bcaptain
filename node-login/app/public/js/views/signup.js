@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-	
 	var av = new AccountValidator();
 	var sc = new SignupController();
 	
@@ -20,9 +19,9 @@ $(document).ready(function(){
 		}
 	});
 	$('#name-tf').focus();
-	
-// customize the account signup form //
-	
+		
+	// customize the account signup form //
+		
 	$('#account-form h2').text('Signup');
 	$('#account-form #sub1').text('Please tell us a little about yourself');
 	$('#account-form #sub2').text('Choose your username & password');
