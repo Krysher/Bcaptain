@@ -401,7 +401,20 @@ function get_selected(ele) {
  	var myEvent = get_selected()["event"];
  	var myEvent_length = myEvent.length;
  	for (var i = 0; i < myEvent_length; i++) {
- 		var local_template = `<div ID="${myEvent[i]["event_type"]}" style="display: block; clear:both; font-size: 18pt; text-align: left; vertical-align: top; margin-top: 5px; margin-bottom: 5px; margin-left: 25px; margin-right: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background-clip:padding-box; border-radius: 10px; background-color:#CBF3DC;">${myEvent[i]["event_type"]}
+ 		switch (myEvent[i]["event_type"]) {
+ 			case "Event":
+ 				var eventColor = "#cbf3dc";
+ 				break;
+ 			case "Notice":
+ 				var eventColor = "#f3cbdc";
+ 				break;
+ 			case "Information":
+ 				var eventColor = "#cbdcf3";
+ 				break;
+ 			default:
+ 				var eventColor = "#cbdcf3";
+ 		}
+ 		var local_template = `<div ID="${myEvent[i]["event_type"]}" style="display: block; clear:both; font-size: 18pt; text-align: left; vertical-align: top; margin-top: 5px; margin-bottom: 5px; margin-left: 25px; margin-right: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background-clip:padding-box; border-radius: 10px; background-color:${eventColor};">${myEvent[i]["event_type"]}
             <div class="eventTitle" style="display: block; clear:both; font-size: 16pt; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; padding-left: 30px;">
               ${myEvent[i]["event_name"]} - ${myEvent[i]["event_date"]} for ${myEvent[i]["event_duration"]}
             </div>
